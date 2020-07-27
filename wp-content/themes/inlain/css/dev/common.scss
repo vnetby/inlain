@@ -1,0 +1,158 @@
+body {
+  color: #333;
+  font-size: 20px;
+  line-height: 1.5;
+  font-family: "SF Pro Display";
+}
+
+::selection {
+  background-color: rgba($c-primary, 70%);
+  color: #fff;
+}
+
+a,
+a:visited,
+a:active {
+  color: #000;
+  text-decoration: none;
+  transition: 0.15s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+p {
+  margin: 0;
+  margin-top: 15px;
+}
+
+/*==============================================================
+*												GRID
+=============================================================== */
+.section {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+/*==============================================================
+*												BUTTONS
+=============================================================== */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn,
+a.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-shrink: 0;
+  padding: 15px 20px;
+
+  transition: 0.15s;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  &.btn-primary {
+    background-color: $c-primary;
+    color: #fff;
+    &:hover {
+      background-color: lighten($c-primary, 70%);
+    }
+  }
+
+  &.btn-border {
+    border: 2px solid rgba($c-primary, 30%);
+    color: $c-primary;
+    &:hover {
+      background-color: $c-primary;
+      color: #fff;
+      border-color: $c-primary;
+    }
+  }
+
+  &.btn-border-fff {
+    border: 2px solid #fff;
+    color: #fff;
+  }
+}
+
+.btn:disabled,
+a.btn:disabled {
+  pointer-events: none !important;
+  cursor: auto !important;
+}
+
+/*==============================================================
+*											    	FONTS
+=============================================================== */
+.fs-50 {
+  font-size: 50px;
+}
+.fs-40 {
+  font-size: 40px;
+}
+.fs-25 {
+  font-size: 25px;
+}
+.fs-20 {
+  font-size: 20px;
+}
+.fs-15 {
+  font-size: 15px;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+.fw-normal {
+  font-weight: normal;
+}
+.lh-2 {
+  line-height: 1.2;
+}
+
+.ta-center {
+  text-align: center;
+}
+
+/*==============================================================
+*												COLORS
+=============================================================== */
+.c-primary {
+  color: $c-primary;
+}
+.c-grey {
+  color: #8b8b8b;
+}
+.c-light {
+  color: rgba(255, 255, 255, 0.5);
+}
+.c-white {
+  color: #fff;
+}
+.c-black {
+  color: #000;
+}
+.c-dark {
+  color: #3333;
+}
+
+.bg-primary {
+  background-color: $c-primary;
+}
+.bg-grey {
+  background-color: #f5f5f5;
+}
+.bg-dark {
+  background-color: #111111;
+}

@@ -2,6 +2,99 @@
 
 @import "./vars.scss";
 
+@import "./fonts.scss";
+
 @import "./common.scss";
 
+/*==============================================================
+*											    MAIN SCREEN
+=============================================================== */
+.section-main-screen {
+  min-height: 100vh;
+  display: flex;
+  .container {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .page-title,
+  .page-subtitle {
+    margin: 0;
+  }
 
+  .page-subtitle {
+    margin-top: 60px;
+  }
+
+  .points-row {
+    display: flex;
+    align-items: stretch;
+    margin: -15px;
+    padding-top: 60px;
+  }
+
+  .point-col {
+    padding: 15px;
+    width: 100%;
+  }
+
+  .hidden-el {
+    position: relative;
+    padding: 30px 20px;
+    background-color: #fff;
+    border-bottom: 4px solid $c-primary;
+    width: 100%;
+    overflow: hidden;
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: 0.2s;
+      transform: translateY(100%);
+      background-color: $c-primary;
+    }
+    .title,
+    .hidden-desc {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      transition: 0.2s;
+    }
+
+    .title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hidden-desc {
+      pointer-events: none;
+      user-select: none;
+      opacity: 0;
+      color: #fff;
+    }
+
+    &:hover {
+      &:before {
+        transform: none;
+      }
+      .title {
+        user-select: none;
+        pointer-events: none;
+        opacity: 0;
+      }
+      .hidden-desc {
+        user-select: text;
+        pointer-events: all;
+        opacity: 1;
+      }
+    }
+  }
+}

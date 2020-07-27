@@ -15,8 +15,8 @@ class Theme_Load extends Vnet_Core
     $this->load_files();
 
     $this->add_vnet_libs();
-    $this->add_hooks();
     $this->remove_hooks();
+    $this->add_hooks();
     $this->add_theme_support();
 
     $this->add_front_vars();
@@ -29,6 +29,7 @@ class Theme_Load extends Vnet_Core
 
   private function define_constants()
   {
+    $this->define('ABOUT_POST', 35);
   }
 
 
@@ -38,6 +39,7 @@ class Theme_Load extends Vnet_Core
 
   private function load_files()
   {
+    require_once $this->path_inc . 'class-vnet-front.php';
   }
 
 
@@ -67,6 +69,8 @@ class Theme_Load extends Vnet_Core
 
     add_action('wp_enqueue_scripts', [$this, 'style_theme']);
     add_action('wp_enqueue_scripts', [$this, 'script_theme']);
+
+    add_action('init', [$this, 'register_post_types']);
 
     add_filter('script_loader_tag', [$this, 'add_async_attribute'], 10, 2);
   }
@@ -114,6 +118,89 @@ class Theme_Load extends Vnet_Core
     wp_enqueue_script('kino-front-index', THEME_URI . 'js/index.min.js', [], null, true);
   }
 
+
+
+
+
+
+
+
+  public function register_post_types()
+  {
+    register_post_type('about_company', [
+      'labels' => [
+        'name'              => 'О компании',
+        'singular_name'     => 'О компании',
+        'edit_item'         => 'Редактировать информацию о компании',
+        'parent_item_colon' => '',
+        'menu_name'         => 'О компании'
+      ],
+      'description'           => '',
+      'public'                => true,
+      'publicly_queryable'    => true,
+      'exclude_from_searc'    => false,
+      'show_u'                => false,
+      'show_in_menu'          => true,
+      'show_in_nav_menus'     => true,
+      'show_in_res'           => true,
+      'rest_base'             => 'about_company',
+      'rest_controller_class' => 'WP_REST_Posts_Controller',
+      'menu_position'         => 21,
+      'menu_icon'             => 'dashicons-building',
+      'capability_type'       => 'post',
+      'map_meta_cap'          => true,
+      'hierarchica'           => false,
+      'supports'              => [],
+      'capabilities'          => ['create_posts' => 'do_not_allow'],
+      'has_archive'           => true,
+      'rewrite'               => true,
+      'can_export'            => true,
+      'delete_with_use'       => false,
+      'query_var'             => '/?{query_var_string}={post_slug}',
+      '_builtin'              => false,
+      '_edit_link'            => 'post.php?post=%d'
+    ]);
+
+
+    register_post_type('the_blocks', [
+      'labels' => [
+        'name'              => 'Блоки',
+        'singular_name'     => 'Блоки',
+        'edit_item'         => 'Редактировать блоки',
+        'parent_item_colon' => '',
+        'menu_name'         => 'Блоки'
+      ],
+      'description'           => '',
+      'public'                => true,
+      'publicly_queryable'    => true,
+      'exclude_from_search'   => false,
+      'show_u'                => false,
+      'show_in_menu'          => false,
+      'show_in_menu'       => true,
+      // 'show_in_menu'       => 'the_blocks_page',
+      // 'show_in_admin_bar'  => false,
+      'show_in_nav_menus'     => true,
+      'show_in_res'           => true,
+      'rest_base'             => 'the_blocks',
+      'rest_controller_class' => 'WP_REST_Posts_Controller',
+      'menu_position'         => 21,
+      'menu_icon'             => 'dashicons-align-left',
+      'capability_type'       => 'post',
+      'map_meta_cap'          => true,
+      'hierarchica'           => false,
+      'supports'              => ['thumbnail', 'title'],
+      // 'capabilities'          => ['create_posts' => 'do_not_allow'],
+      // 'taxonomies'         => ['news_cat'],
+      'has_archive'           => true,
+      'rewrite'               => true,
+      'can_export'            => true,
+      'delete_with_use'       => false,
+      'query_var'             => false,
+      // 'query_var'             => '/?{query_var_string}={post_slug}',
+      '_builtin'              => false,
+      '_edit_link'            => 'post.php?post=%d'
+    ]);
+  }
 
 
 
