@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="utf-8">
+    <!-- <base href="/"> -->
+
+    <title>Title</title>
+    <meta name="description" content="">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Template Basic Images Start -->
+    <meta property="og:image" content="path/to/image.jpg">
+    <link rel="icon" href="images/favicon/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/favicon.png">
+    <!-- Template Basic Images End -->
+
+    <!-- Custom Browsers Color Start -->
+    <meta name="theme-color" content="#000">
+    <style>
+        body {
+            opacity: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            background-color: #000000;
+        }
+    </style>
+    <link rel="stylesheet" href="css/libs.min.css">
+    <link rel="stylesheet" href="css/main.min.css">
+</head>
+
+<body>
+
+<main class="flex">
+
+    <div id="auth" class="container">
+        <div class="container column flex">
+            <div class="head__logo">
+                <span class="logo b">Киноклуб</span>
+            </div>
+            <p class="auth__info title mob__down">Контент киноклуба – это фильмы, сериалы и мультфильмы от всех 6 голливудских мейджоров, мировых и локальных киностудий, а также и ТВ-каналов: Disney, Universal, Warner Brothers, Paramount, 21th Century Fox, Columbia Pictures, Централ Партнершип, Базелевс, СТС, НТВ, и т.д.</p>
+            <div class="auth__block column">
+                <div class="tabs__line flex">
+                    <div class="tabs__btn flex point active" data-tab="1">
+                        <span>Авторизация</span>
+                    </div>
+                    <div class="tabs__btn flex point" data-tab="2">
+                        <span>Регистрация</span>
+                    </div>
+                </div>
+                <form class="column active tabs__wrap" data-tab="1">
+                    <input class="round" type="text" placeholder="Почта *" required>
+                    <input class="round" type="password" required placeholder="Пароль*">
+                    <div class="checkbox__group flex__start">
+                        <input type="checkbox" class="custom__checkbox" id="check_remember" checked>
+                        <span class="custom__checkbox__span round" tabindex="0"></span>
+                        <label for="check_remember" class="custom__checkbox__label point"> Запомнить меня </label>
+                    </div>
+                    <div class="btn round flex h point">Войти в киноклуб</div>
+                    <a href="#forgot__modal" class="point psw__forgot title fnb">Забыли пароль?</a>
+                </form>
+                <form class="column tabs__wrap" data-tab="2">
+                    <input class="round" type="text" placeholder="Логин*" required>
+                    <input class="round" type="email" placeholder="Почта*" required>
+                    <input class="round" type="password" required placeholder="Пароль*">
+                    <input class="round" type="password" required placeholder="Повторите пароль*">
+                    <div class="btn round flex h point">Зарегистрироваться</div>
+                    <div class="checkbox__group flex__start">
+                        <input type="checkbox" class="custom__checkbox" id="confidential" checked required>
+                        <span class="custom__checkbox__span round" tabindex="0"></span>
+                        <label for="confidential" class="custom__checkbox__label point">Нажимая на кнопку «Получить доступ» Вы принимаете условия
+                            <a href="#active__modal" class="fnb">Политики конфиденциальности</a>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<div id="forgot__modal" class="hdn modal__container">
+    <img class="close__btn point" src="/images/svg/close.svg" alt="">
+    <div class="container column">
+        <span class="h">Забыли пароль?</span>
+        <p>Введите почту и мы пришлем вам новый</p>
+        <form action="" class="forgot__form" method="POST">
+            <input type="email" placeholder="Email">
+            <div class="btn round flex h point">Подтвердить</div>
+        </form>
+    </div>
+</div>
+
+<div id="active__modal" class="hdn modal__container">
+    <img class="close__btn point" src="/images/svg/close.svg" alt="">
+    <div class="container column">
+        <span class="h">Для активации аккаунта перейдите по ссылке отправленной вам на почту</span>
+    </div>
+</div>
+
+
+<script src="js/scripts.min.js"></script>
+<script src="js/common.js"></script>
+
+</body>
+
+</html>

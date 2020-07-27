@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="utf-8">
+    <!-- <base href="/"> -->
+
+    <title>Title</title>
+    <meta name="description" content="">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Template Basic Images Start -->
+    <meta property="og:image" content="path/to/image.jpg">
+    <link rel="icon" href="images/favicon/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/favicon.png">
+    <!-- Template Basic Images End -->
+
+    <!-- Custom Browsers Color Start -->
+    <meta name="theme-color" content="#000">
+    <style>
+        body {
+            opacity: 0;
+            overflow-x: hidden;
+        }
+
+        html {
+            background-color: #000000;
+        }
+    </style>
+    <link rel="stylesheet" href="css/libs.min.css">
+    <link rel="stylesheet" href="css/main.min.css">
+</head>
+
+<body>
+
+<header id="header" class="tr">
+
+    <div class="container head__line flex__beetwen">
+        <a href="/" class="head__logo">
+            <span class="logo b">Киноклуб</span>
+        </a>
+        <div class="flex head__icon mob__down">
+            <a class="search__btn" href="javascript:void(0);">
+                <svg class="anim__svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.728 17.2913L15.8332 13.3971C15.6574 13.2214 15.4191 13.1237 15.1691 13.1237H14.5323C15.6105 11.7449 16.2512 10.0107 16.2512 8.12421C16.2512 3.63636 12.6142 0 8.12559 0C3.63698 0 0 3.63636 0 8.12421C0 12.612 3.63698 16.2484 8.12559 16.2484C10.0125 16.2484 11.747 15.6079 13.126 14.5298V15.1665C13.126 15.4165 13.2236 15.6547 13.3994 15.8305L17.2942 19.7246C17.6614 20.0918 18.2552 20.0918 18.6185 19.7246L19.7241 18.6193C20.0913 18.2521 20.0913 17.6584 19.728 17.2913ZM8.12559 13.1237C5.36367 13.1237 3.12523 10.8896 3.12523 8.12421C3.12523 5.36276 5.35977 3.12469 8.12559 3.12469C10.8875 3.12469 13.126 5.35885 13.126 8.12421C13.126 10.8857 10.8914 13.1237 8.12559 13.1237Z"
+                          fill="white"/>
+                </svg>
+            </a>
+            <a href="javascript:void(0);">
+                <svg class="anim__svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.9643 14.2992C17.12 13.43 16.0714 12.3484 16.0714 8.125C16.0714 5.02367 13.8769 2.45043 10.9994 1.95977C11.1396 1.75126 11.2146 1.50361 11.2143 1.25C11.2143 0.559648 10.6706 0 10 0C9.32937 0 8.78571 0.559648 8.78571 1.25C8.78571 1.51367 8.86521 1.75812 9.0006 1.95977C6.12305 2.45043 3.92857 5.02367 3.92857 8.125C3.92857 12.3484 2.87961 13.43 2.03531 14.2992C0.891259 15.4769 1.70206 17.5 3.32325 17.5H7.57143C7.57143 18.8807 8.65874 20 10 20C11.3413 20 12.4286 18.8807 12.4286 17.5H16.6764C18.2944 17.5 19.1107 15.4793 17.9643 14.2992ZM10 18.4375C10.0805 18.4375 10.1577 18.4704 10.2147 18.529C10.2716 18.5876 10.3036 18.6671 10.3036 18.75C10.3036 18.8329 10.2716 18.9124 10.2147 18.971C10.1577 19.0296 10.0805 19.0625 10 19.0625C9.16305 19.0625 8.48214 18.3616 8.48214 17.5H9.08928C9.08928 18.017 9.49782 18.4375 10 18.4375Z"
+                          fill="white"/>
+                </svg>
+            </a>
+            <a href="#auth__modal" class="fnb">
+                <svg class="anim__svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 0C13.4518 0 16.25 2.7982 16.25 6.25C16.25 9.7018 13.4518 12.5 10 12.5C6.5482 12.5 3.75 9.7018 3.75 6.25C3.75 2.7982 6.5482 0 10 0ZM17.1595 13.0399L14.3738 12.3435C11.4471 14.4486 7.89969 13.9788 5.62617 12.3435L2.84051 13.0399C1.17113 13.4572 0 14.9571 0 16.6779V18.125C0 19.1605 0.839453 20 1.875 20H18.125C19.1605 20 20 19.1605 20 18.125V16.6779C20 14.9571 18.8289 13.4572 17.1595 13.0399Z"
+                          fill="white"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <div class="container search__line flex tr mob__down">
+        <form action="/search" class="flex tr search__form" method="POST">
+            <input type="text" placeholder="Поиск...">
+            <div class="btn round point"><img src="./images/svg/search.svg" alt=""></div>
+        </form>
+    </div>
+
+</header>
+
+<div id="mobile_header" class="container flex__beetwen mob__up">
+    <a href="/">
+        <svg class="anim__svg" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3851 17.4554V12.3335C17.3851 12.2048 17.3296 12.0833 17.2359 12.0011L10.7073 6.4682C10.5511 6.33954 10.3289 6.33954 10.1761 6.4682L3.64751 12.0011C3.55034 12.0833 3.49467 12.2048 3.49467 12.3335V17.4554C3.49467 17.9307 3.86626 18.3132 4.32817 18.3132H16.5516C17.0135 18.3132 17.3851 17.9307 17.3851 17.4554ZM12.3001 13.8464C12.5667 13.6924 12.5667 13.3076 12.3001 13.1536L9.75004 11.6814C9.48344 11.5274 9.14995 11.7198 9.14995 12.0278V14.9723C9.14995 15.2802 9.48344 15.4726 9.75004 15.3187L12.3001 13.8464Z" fill="white"/>
+            <path d="M17.3851 7.69415L20.2881 10.1568C20.4654 10.3069 20.493 10.575 20.3472 10.7608L19.4617 11.8688C19.3157 12.0511 19.052 12.0761 18.8748 11.926L10.7073 5.00278C10.5511 4.87411 10.3289 4.87411 10.1761 5.00278L2.00859 11.926C1.83134 12.0761 1.56743 12.0511 1.42168 11.8688L0.536178 10.7608C0.390182 10.5786 0.414596 10.3069 0.591598 10.1568L9.3809 2.70456C9.99541 2.18271 10.8843 2.18271 11.4991 2.70456L14.607 5.33875V2.74387C14.607 2.50797 14.7945 2.31497 15.0237 2.31497H16.9683C17.1976 2.31497 17.3851 2.50797 17.3851 2.74387V7.69415Z" fill="white"/>
+        </svg>
+    </a>
+    <a href="#filter__modal" class="fnb">
+        <svg class="anim__svg" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.39537 -6.65428e-08L3.7793 -1.27036e-07C4.00764 -1.37018e-07 4.19447 0.1875 4.19447 0.416666L4.19447 14.4444L4.47126 14.4444C4.93142 14.4444 5.30162 14.816 5.30162 15.2778L5.30162 15.8333C5.30162 16.2951 4.93142 16.6667 4.47126 16.6667L4.19448 16.6667L4.19448 19.5833C4.19448 19.8125 4.00764 20 3.7793 20L2.39537 20C2.16702 20 1.98019 19.8125 1.98019 19.5833L1.98019 16.6667L1.7034 16.6667C1.24325 16.6667 0.873047 16.2951 0.873047 15.8333L0.873047 15.2778C0.873047 14.816 1.24325 14.4444 1.7034 14.4444L1.98019 14.4444L1.98019 0.416666C1.98019 0.1875 2.16702 -5.65614e-08 2.39537 -6.65428e-08ZM7.5159 0.416666L7.5159 3.33333L7.23912 3.33333C6.77896 3.33333 6.40876 3.70486 6.40876 4.16667L6.40876 4.72222C6.40876 5.18403 6.77896 5.55556 7.23912 5.55556L7.5159 5.55556L7.5159 19.5833C7.5159 19.8125 7.70273 20 7.93108 20L9.31501 20C9.54336 20 9.73019 19.8125 9.73019 19.5833L9.73019 5.55555L10.007 5.55555C10.4671 5.55555 10.8373 5.18403 10.8373 4.72222L10.8373 4.16667C10.8373 3.70486 10.4671 3.33333 10.007 3.33333L9.73019 3.33333L9.73019 0.416666C9.73019 0.1875 9.54336 -3.78991e-07 9.31501 -3.6901e-07L7.93108 -3.08517e-07C7.70273 -2.98535e-07 7.5159 0.1875 7.5159 0.416666ZM13.0516 0.416665L13.0516 10L12.7748 10C12.3147 10 11.9445 10.3715 11.9445 10.8333L11.9445 11.3889C11.9445 11.8507 12.3147 12.2222 12.7748 12.2222L13.0516 12.2222L13.0516 19.5833C13.0516 19.8125 13.2384 20 13.4668 20L14.8507 20C15.0791 20 15.2659 19.8125 15.2659 19.5833L15.2659 12.2222L15.5427 12.2222C16.0028 12.2222 16.373 11.8507 16.373 11.3889L16.373 10.8333C16.373 10.3715 16.0028 10 15.5427 10L15.2659 10L15.2659 0.416665C15.2659 0.187499 15.0791 -6.20965e-07 14.8507 -6.10984e-07L13.4668 -5.5049e-07C13.2384 -5.40509e-07 13.0516 0.187499 13.0516 0.416665Z" fill="white"/>
+        </svg>
+    </a>
+    <a href="#search__modal" class="fnb">
+        <svg class="anim__svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.728 17.2913L15.8332 13.3971C15.6574 13.2214 15.4191 13.1237 15.1691 13.1237H14.5323C15.6105 11.7449 16.2512 10.0107 16.2512 8.12421C16.2512 3.63636 12.6142 0 8.12559 0C3.63698 0 0 3.63636 0 8.12421C0 12.612 3.63698 16.2484 8.12559 16.2484C10.0125 16.2484 11.747 15.6079 13.126 14.5298V15.1665C13.126 15.4165 13.2236 15.6547 13.3994 15.8305L17.2942 19.7246C17.6614 20.0918 18.2552 20.0918 18.6185 19.7246L19.7241 18.6193C20.0913 18.2521 20.0913 17.6584 19.728 17.2913ZM8.12559 13.1237C5.36367 13.1237 3.12523 10.8896 3.12523 8.12421C3.12523 5.36276 5.35977 3.12469 8.12559 3.12469C10.8875 3.12469 13.126 5.35885 13.126 8.12421C13.126 10.8857 10.8914 13.1237 8.12559 13.1237Z"
+                  fill="white"/>
+        </svg>
+    </a>
+    <a href="javascript:void(0);">
+        <svg class="anim__svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.9643 14.2992C17.12 13.43 16.0714 12.3484 16.0714 8.125C16.0714 5.02367 13.8769 2.45043 10.9994 1.95977C11.1396 1.75126 11.2146 1.50361 11.2143 1.25C11.2143 0.559648 10.6706 0 10 0C9.32937 0 8.78571 0.559648 8.78571 1.25C8.78571 1.51367 8.86521 1.75812 9.0006 1.95977C6.12305 2.45043 3.92857 5.02367 3.92857 8.125C3.92857 12.3484 2.87961 13.43 2.03531 14.2992C0.891259 15.4769 1.70206 17.5 3.32325 17.5H7.57143C7.57143 18.8807 8.65874 20 10 20C11.3413 20 12.4286 18.8807 12.4286 17.5H16.6764C18.2944 17.5 19.1107 15.4793 17.9643 14.2992ZM10 18.4375C10.0805 18.4375 10.1577 18.4704 10.2147 18.529C10.2716 18.5876 10.3036 18.6671 10.3036 18.75C10.3036 18.8329 10.2716 18.9124 10.2147 18.971C10.1577 19.0296 10.0805 19.0625 10 19.0625C9.16305 19.0625 8.48214 18.3616 8.48214 17.5H9.08928C9.08928 18.017 9.49782 18.4375 10 18.4375Z"
+                  fill="white"/>
+        </svg>
+    </a>
+    <a href="#auth__modal" class="fnb">
+        <svg class="anim__svg" width="20" height="20" viewBox="0 0 20 20" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 0C13.4518 0 16.25 2.7982 16.25 6.25C16.25 9.7018 13.4518 12.5 10 12.5C6.5482 12.5 3.75 9.7018 3.75 6.25C3.75 2.7982 6.5482 0 10 0ZM17.1595 13.0399L14.3738 12.3435C11.4471 14.4486 7.89969 13.9788 5.62617 12.3435L2.84051 13.0399C1.17113 13.4572 0 14.9571 0 16.6779V18.125C0 19.1605 0.839453 20 1.875 20H18.125C19.1605 20 20 19.1605 20 18.125V16.6779C20 14.9571 18.8289 13.4572 17.1595 13.0399Z"
+                  fill="white"/>
+        </svg>
+    </a>
+</div>
+
+<main>
+
+    <section class="top__slider">
+        <div class="container">
+            <div class="slider__wrapper flex">
+                <a href="" class="slider__card"><img src="./images/slide1.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide2.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide3.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide4.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide5.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide6.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide7.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide8.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide9.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide1.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide2.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide3.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide4.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide5.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide6.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide7.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide8.png" alt="" class="round"></a>
+                <a href="" class="slider__card"><img src="./images/slide9.png" alt="" class="round"></a>
+            </div>
+        </div>
+    </section>
+
+    <div class="page__wrapper container flex__beetwen">
+
+        <aside id="sidebar">
+
+            <div class="filter__block mob__down column">
+                <div class="tag__group flex__wrap">
+                    <div class="tag__btn border point round active">2019</div>
+                    <div class="tag__btn border point round">2018</div>
+                    <div class="tag__btn border point round">2017</div>
+                    <div class="tag__btn border point round">Аниме</div>
+                    <div class="tag__btn border point round">Вестерны</div>
+                    <div class="tag__btn border point round">Военные</div>
+                    <div class="tag__btn border point round">Детективы</div>
+                    <div class="tag__btn border point round">Драмы</div>
+                    <div class="tag__btn border point round">Комедии</div>
+                    <div class="tag__btn border point round">Криминал</div>
+                </div>
+                <div class="select__group">
+                    <div class="select__tab round border point">
+                        <span>Жанр</span>
+                    </div>
+                    <ul class="round">
+                        <li class="point">Аниме</li>
+                        <li class="point">Вестерны</li>
+                        <li class="point">Детективы</li>
+                        <li class="point">Комедии</li>
+                    </ul>
+                </div>
+                <div class="select__group">
+                    <div class="select__tab round border point">
+                        <span>Страна</span>
+                    </div>
+                    <ul class="round">
+                        <li class="point">Аниме</li>
+                        <li class="point">Вестерны</li>
+                        <li class="point">Детективы</li>
+                        <li class="point">Комедии</li>
+                    </ul>
+                </div>
+                <div class="select__group">
+                    <div class="select__tab round border point">
+                        <span>Качество</span>
+                    </div>
+                    <ul class="round">
+                        <li class="point">Аниме</li>
+                        <li class="point">Вестерны</li>
+                        <li class="point">Детективы</li>
+                        <li class="point">Комедии</li>
+                    </ul>
+                </div>
+                <div class="select__group">
+                    <div class="select__tab round border point">
+                        <span>Перевод</span>
+                    </div>
+                    <ul class="round">
+                        <li class="point">Аниме</li>
+                        <li class="point">Вестерны</li>
+                        <li class="point">Детективы</li>
+                        <li class="point">Комедии</li>
+                    </ul>
+                </div>
+                <div class="flex flex__beetwen result__btn">
+                    <div class="point btn round ">Продолжить</div>
+                    <div class="flex">Найдено: <span class="b" id="result">100</span></div>
+                </div>
+            </div>
+
+            <div class="column sidebar__block">
+                <h3 class="h mob__btn round">Скоро на сайте</h3>
+                <ul class="sidebar__new__list tr">
+                    <li class="flex sidebar__new__card">
+                        <a href=""><img src="./images/lazy.gif" data-src="./images/sidebar_preview.png" alt=""></a>
+                        <div class="column">
+                            <a href="" class="b">Лёд 2 (2020)</a>
+                            <p>Что происходит в сказках после свадьбы принца и принцессы? Фигуристка Надя и хоккеист
+                                Саша поженились и больше всего на свете мечтают о ребенке. Правда, цена, которую им
+                                придется ...</p>
+                        </div>
+                    </li>
+                    <li class="flex sidebar__new__card">
+                        <a href=""><img src="./images/lazy.gif" data-src="./images/sidebar_preview.png" alt=""></a>
+                        <div class="column">
+                            <a href="" class="b">Лёд 2 (2020)</a>
+                            <p>Что происходит в сказках после свадьбы принца и принцессы? Фигуристка Надя и хоккеист
+                                Саша поженились и больше всего на свете мечтают о ребенке. Правда, цена, которую им
+                                придется ...</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar__block mob__down">
+                <div id="sidebar__banner"></div>
+            </div>
+
+            <div class="sidebar__block">
+                <h3 class="h mob__btn round">Обновления сериалов</h3>
+                <div class="sidebar__serial__list flex__wrap flex__beetwen tr">
+                    <a href="" class="sidebar__serial__card column ">
+                        <img class="round"  src="./images/lazy.gif" data-src="./images/serial_preview.png" alt="">
+                        <span class="b">Ивановы-Ивановы (1-4 сезон)</span>
+                    </a>
+                    <a href="" class="sidebar__serial__card column">
+                        <img class="round" src="./images/lazy.gif" data-src="./images/serial_preview.png" alt="">
+                        <span class="b">Ивановы-Ивановы (1-4 сезон)</span>
+                    </a>
+                    <a href="" class="sidebar__serial__card column">
+                        <img class="round" src="./images/lazy.gif" data-src="./images/serial_preview.png" alt="">
+                        <span class="b">Ивановы-Ивановы (1-4 сезон)</span>
+                    </a>
+                    <a href="" class="sidebar__serial__card column">
+                        <img class="round" src="./images/lazy.gif" data-src="./images/serial_preview.png" alt="">
+                        <span class="b">Ивановы-Ивановы (1-4 сезон)</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="#filter__modal" class="filter__btn btn__in mob__up round flex fnb">
+                <img src="/images/svg/filter_orange.svg" alt="">
+                Настроить фильтры
+            </a>
+
+        </aside>
+
+        <section id="content">
+
+            <div class="profile__group flex__wrap">
+                <div class="tabs__btn border point round active" data-tab="1">Профиль</div>
+                <div class="tabs__btn border point round" data-tab="2">Избранное <span class="count b">1</span> </div>
+                <div class="tabs__btn border point round" data-tab="3">Продолжить</div>
+                <a href="" class="logout border point round">Выйти</a>
+            </div>
+
+            <div class="tabs__wrap active" data-tab="1">
+                <div class="profile__block">
+                    <form action="" class="profile__form flex__start border">
+                        <div class="flex profile__avatar">
+                            <img src="./images/lazy.gif" data-src="./images/no-avatar.png" alt="">
+                        </div>
+                        <div class="profile__form__input">
+                            <input type="text" placeholder="Валерий Жур">
+                            <input type="email" placeholder="gv@seobility.by">
+                            <div class="flex__beetwen">
+                                <input type="password" placeholder="Пароль">
+                                <input type="password" placeholder="Подтвердите пароль">
+                            </div>
+                            <input type="submit" class="point round btn__in" value="Сохранить">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tabs__wrap" data-tab="2">
+
+                <div class="film__list">
+
+                    <div class="film__card round border column">
+                        <a href="/single.html" class="h">Падение ангела (2019)</a>
+                        <div class="film__card__wrap flex__beetwen">
+                            <a href="./images/film_card.png" class="fnb__img round">
+                                <img src="./images/lazy.gif" data-src="./images/film_card.png" alt="" class="film__card__img">
+                            </a>
+                            <div class="film__card__info column">
+                                <div class="film__card__top outer flex__beetwen">
+                                <span class="h flex">
+                                    <img src="./images/svg/rating.svg" alt="">
+                                    8,4
+                                </span>
+                                    <span class="point like b flex">
+                                    <svg class="anim__svg" width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M14.6654 0C12.7132 0 10.8824 1.52755 10 2.39207C9.11765 1.52755 7.28677 0 5.33456 0C1.99632 0 0 1.93783 0 5.18343C0 7.84291 2.45588 10.0665 2.54412 10.1434L9.41912 16.7665C9.74265 17.0778 10.2574 17.0778 10.5809 16.7665L17.4449 10.1654C17.5441 10.0665 20 7.83925 20 5.18343C20 1.93783 18.0037 0 14.6654 0Z" fill="#777777"/>
+                                    </svg>
+                                    В избранное
+                                </span>
+                                    <a class="flex round" href="">Смотреть</a>
+                                </div>
+                                <div class="film__card__desc acc__elem">
+                                    <div class="acc__hidden tr">
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                    </div>
+                                    <div class="acc__btn point round flex__beetwen">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <ul class="film__card__list column">
+                                    <li><span>Год выпуска: </span>2019</li>
+                                    <li><span>Страна: </span>США</li>
+                                    <li><span>Жанр: </span>Боевик</li>
+                                    <li><span>Качество: </span>WEB-DLRip•</li>
+                                    <li><span>Перевод: </span>Дублированный•</li>
+                                    <li><span>Продолжительность: </span>114 мин. / 01:54</li>
+                                    <li><span>Премьера: </span>21 августа 2019</li>
+                                </ul>
+                                <div class="film__card__icon flex__start">
+                                    <div>
+                                        <img src="./images/svg/eye.svg" alt="">
+                                        100 234
+                                    </div>
+                                    <div>
+                                        <img src="./images/svg/chat.svg" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="tabs__wrap" data-tab="3">
+
+                <div class="film__list">
+
+                    <div class="film__card round border column">
+                        <a href="/single.html" class="h">Падение ангела (2019)</a>
+                        <div class="film__card__wrap flex__beetwen">
+                            <a href="./images/film_card.png" class="fnb__img round">
+                                <img src="./images/lazy.gif" data-src="./images/film_card.png" alt="" class="film__card__img">
+                            </a>
+                            <div class="film__card__info column">
+                                <div class="film__card__top outer flex__beetwen">
+                                <span class="h flex">
+                                    <img src="./images/svg/rating.svg" alt="">
+                                    8,4
+                                </span>
+                                    <span class="point like b flex">
+                                    <svg class="anim__svg" width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M14.6654 0C12.7132 0 10.8824 1.52755 10 2.39207C9.11765 1.52755 7.28677 0 5.33456 0C1.99632 0 0 1.93783 0 5.18343C0 7.84291 2.45588 10.0665 2.54412 10.1434L9.41912 16.7665C9.74265 17.0778 10.2574 17.0778 10.5809 16.7665L17.4449 10.1654C17.5441 10.0665 20 7.83925 20 5.18343C20 1.93783 18.0037 0 14.6654 0Z" fill="#777777"/>
+                                    </svg>
+                                    В избранное
+                                </span>
+                                    <a class="flex round" href="">Смотреть</a>
+                                </div>
+                                <div class="film__card__desc acc__elem">
+                                    <div class="acc__hidden tr">
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                    </div>
+                                    <div class="acc__btn point round flex__beetwen">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <ul class="film__card__list column">
+                                    <li><span>Год выпуска: </span>2019</li>
+                                    <li><span>Страна: </span>США</li>
+                                    <li><span>Жанр: </span>Боевик</li>
+                                    <li><span>Качество: </span>WEB-DLRip•</li>
+                                    <li><span>Перевод: </span>Дублированный•</li>
+                                    <li><span>Продолжительность: </span>114 мин. / 01:54</li>
+                                    <li><span>Премьера: </span>21 августа 2019</li>
+                                </ul>
+                                <div class="film__card__icon flex__start">
+                                    <div>
+                                        <img src="./images/svg/eye.svg" alt="">
+                                        100 234
+                                    </div>
+                                    <div>
+                                        <img src="./images/svg/chat.svg" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="film__card round border column">
+                        <a href="/single.html" class="h">Падение ангела (2019)</a>
+                        <div class="film__card__wrap flex__beetwen">
+                            <a href="./images/film_card.png" class="fnb__img round">
+                                <img src="./images/lazy.gif" data-src="./images/film_card.png" alt="" class="film__card__img">
+                            </a>
+                            <div class="film__card__info column">
+                                <div class="film__card__top outer flex__beetwen">
+                                <span class="h flex">
+                                    <img src="./images/svg/rating.svg" alt="">
+                                    8,4
+                                </span>
+                                    <span class="point like b flex">
+                                    <svg class="anim__svg" width="20" height="17" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M14.6654 0C12.7132 0 10.8824 1.52755 10 2.39207C9.11765 1.52755 7.28677 0 5.33456 0C1.99632 0 0 1.93783 0 5.18343C0 7.84291 2.45588 10.0665 2.54412 10.1434L9.41912 16.7665C9.74265 17.0778 10.2574 17.0778 10.5809 16.7665L17.4449 10.1654C17.5441 10.0665 20 7.83925 20 5.18343C20 1.93783 18.0037 0 14.6654 0Z" fill="#777777"/>
+                                    </svg>
+                                    В избранное
+                                </span>
+                                    <a class="flex round" href="">Смотреть</a>
+                                </div>
+                                <div class="film__card__desc acc__elem">
+                                    <div class="acc__hidden tr">
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                        <p>
+                                            Майк Бэннинг уже много лет служит агентом секретной службы.               Он любит работу и является профессионалом в своём деле. Герой  фильма «Падение ангела» не раз попадал в переделки, которые         несли серьёзную угрозу для
+                                        </p>
+                                    </div>
+                                    <div class="acc__btn point round flex__beetwen">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                                <ul class="film__card__list column">
+                                    <li><span>Год выпуска: </span>2019</li>
+                                    <li><span>Страна: </span>США</li>
+                                    <li><span>Жанр: </span>Боевик</li>
+                                    <li><span>Качество: </span>WEB-DLRip•</li>
+                                    <li><span>Перевод: </span>Дублированный•</li>
+                                    <li><span>Продолжительность: </span>114 мин. / 01:54</li>
+                                    <li><span>Премьера: </span>21 августа 2019</li>
+                                </ul>
+                                <div class="film__card__icon flex__start">
+                                    <div>
+                                        <img src="./images/svg/eye.svg" alt="">
+                                        100 234
+                                    </div>
+                                    <div>
+                                        <img src="./images/svg/chat.svg" alt="">
+                                        4
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </section>
+    </div>
+
+</main>
+
+
+<div id="filter__modal" class="hdn modal__container">
+    <img class="close__btn point" src="/images/svg/close.svg" alt="">
+    <div class="container column">
+        <div class="tag__group flex__wrap">
+            <div class="tag__btn border point round active">2019</div>
+            <div class="tag__btn border point round">2018</div>
+            <div class="tag__btn border point round">2017</div>
+            <div class="tag__btn border point round">Аниме</div>
+            <div class="tag__btn border point round">Вестерны</div>
+            <div class="tag__btn border point round">Военные</div>
+            <div class="tag__btn border point round">Детективы</div>
+            <div class="tag__btn border point round">Драмы</div>
+            <div class="tag__btn border point round">Комедии</div>
+            <div class="tag__btn border point round">Криминал</div>
+        </div>
+        <div class="select__group">
+            <div class="select__tab round border point">
+                <span>Жанр</span>
+            </div>
+            <ul class="round">
+                <li class="point">Аниме</li>
+                <li class="point">Вестерны</li>
+                <li class="point">Детективы</li>
+                <li class="point">Комедии</li>
+            </ul>
+        </div>
+        <div class="select__group">
+            <div class="select__tab round border point">
+                <span>Страна</span>
+            </div>
+            <ul class="round">
+                <li class="point">Аниме</li>
+                <li class="point">Вестерны</li>
+                <li class="point">Детективы</li>
+                <li class="point">Комедии</li>
+            </ul>
+        </div>
+        <div class="select__group">
+            <div class="select__tab round border point">
+                <span>Качество</span>
+            </div>
+            <ul class="round">
+                <li class="point">Аниме</li>
+                <li class="point">Вестерны</li>
+                <li class="point">Детективы</li>
+                <li class="point">Комедии</li>
+            </ul>
+        </div>
+        <div class="select__group">
+            <div class="select__tab round border point">
+                <span>Перевод</span>
+            </div>
+            <ul class="round">
+                <li class="point">Аниме</li>
+                <li class="point">Вестерны</li>
+                <li class="point">Детективы</li>
+                <li class="point">Комедии</li>
+            </ul>
+        </div>
+        <div class="sort__group flex__wrap">
+            <div class="tag__btn border point round active">Дата</div>
+            <div class="tag__btn border point round">Рейтинг</div>
+            <div class="tag__btn border point round">Посещаемость</div>
+            <div class="tag__btn border point round">Комментарии</div>
+            <div class="tag__btn border point round">Алфавит</div>
+        </div>
+        <div class="result__block column">
+            <div class="result__str">Найдено: <span class="b" id="result">100</span></div>
+            <div class="btn round point b flex">Продолжить</div>
+            <div class="btn__reset border point b round flex">Сбросить фильтр</div>
+        </div>
+
+    </div>
+</div>
+
+<div id="search__modal" class="hdn modal__container">
+    <img class="close__btn point" src="/images/svg/close.svg" alt="">
+    <div class="container column">
+        <form action="/search" class="flex tr search__form" method="POST">
+            <input type="text" placeholder="Поиск...">
+            <div class="btn round point"><img src="./images/svg/search.svg" alt=""></div>
+        </form>
+    </div>
+</div>
+
+<div id="auth__modal" class="hdn modal__container">
+    <img class="close__btn point" src="/images/svg/close.svg" alt="">
+    <div class="container column flex">
+        <div class="head__logo">
+            <span class="logo b">Киноклуб</span>
+        </div>
+        <p class="auth__info title">Контент киноклуба – это фильмы, сериалы и мультфильмы от всех 6 голливудских мейджоров, мировых и локальных киностудий, а также и ТВ-каналов: Disney, Universal, Warner Brothers, Paramount, 21th Century Fox, Columbia Pictures, Централ Партнершип, Базелевс, СТС, НТВ, и т.д.</p>
+        <div class="auth__block column">
+            <div class="tabs__line flex">
+                <div class="tabs__btn flex point active" data-tab="1">
+                    <span>Авторизация</span>
+                </div>
+                <div class="tabs__btn flex point" data-tab="2">
+                    <span>Регистрация</span>
+                </div>
+            </div>
+            <form class="column active tabs__wrap" data-tab="1">
+                <input class="round" type="text" placeholder="Логин*" required>
+                <input class="round" type="password" required placeholder="Пароль*">
+                <div class="checkbox__group flex__start">
+                    <input type="checkbox" class="custom__checkbox" id="check_remember" checked>
+                    <span class="custom__checkbox__span round" tabindex="0"></span>
+                    <label for="check_remember" class="custom__checkbox__label point"> Запомнить меня </label>
+                </div>
+                <div class="btn round flex h point" type="submit">Войти в киноклуб</div>
+                <span data-tab="3" class="point psw__forgot title">Забыли пароль?</span>
+            </form>
+            <form class="column tabs__wrap" data-tab="2">
+                <input class="round" type="text" placeholder="Логин*" required>
+                <div class="select__group white">
+                    <div class="select__tab round border point">
+                        <span>Страна</span>
+                        <input type="hidden" value="">
+                    </div>
+                    <ul class="round">
+                        <li class="point" data-val="1">Беларусь</li>
+                        <li class="point" data-val="2">Россия</li>
+                        <li class="point" data-val="3">Казахстан</li>
+                        <li class="point" data-val="4">Италия</li>
+                    </ul>
+                </div>
+                <input class="round" type="email" placeholder="Почта*" required>
+                <input class="round" type="password" required placeholder="Пароль*">
+                <input class="round" type="password" required placeholder="Повторите пароль*">
+                <div class="btn round flex h point" type="submit">Получить доступ</div>
+                <div class="checkbox__group flex__start">
+                    <input type="checkbox" class="custom__checkbox" id="confidential" checked required>
+                    <span class="custom__checkbox__span round" tabindex="0"></span>
+                    <label for="confidential" class="custom__checkbox__label point">Нажимая на кнопку «Получить доступ» Вы принимаете условия
+                        <a href="#">Политики конфиденциальности</a>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/scripts.min.js"></script>
+<script src="js/common.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+/node_modules
+/.dist
+/.idea
+/dist
+/.siteconf.json
+/wp-content/cache
+/wp-content/uploads

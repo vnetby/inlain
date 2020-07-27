@@ -1,0 +1,1 @@
+/var/www/vadzim/data/www/kino.vnetby.net/wp-content/plugins/query-monitor/wp-content/db.php
