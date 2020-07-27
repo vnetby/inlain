@@ -1,6 +1,0 @@
-{
-  "name"        : "Hover-CSS",
-  "description" : "",
-  "site"        : "https://ianlunn.github.io/Hover/",
-  "head"        : ["hover.min.css"]
-}

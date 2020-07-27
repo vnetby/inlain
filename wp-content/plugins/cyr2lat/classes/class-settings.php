@@ -45,13 +45,6 @@ class Settings {
 	const OPTION_NAME = 'cyr_to_lat_settings';
 
 	/**
-	 * Plugin options.
-	 *
-	 * @var array
-	 */
-	private $options;
-
-	/**
 	 * Form fields.
 	 *
 	 * @var array
@@ -64,6 +57,20 @@ class Settings {
 	 * @var array
 	 */
 	public $settings;
+
+	/**
+	 * Plugin options.
+	 *
+	 * @var array
+	 */
+	private $options;
+
+	/**
+	 * Served locales.
+	 *
+	 * @var array
+	 */
+	protected $locales = [];
 
 	/**
 	 * Settings constructor.
@@ -87,7 +94,7 @@ class Settings {
 	 */
 	public function init_hooks() {
 		add_filter(
-			'plugin_action_links_' . plugin_basename( CYR_TO_LAT_FILE ),
+			'plugin_action_links_' . plugin_basename( constant( 'CYR_TO_LAT_FILE' ) ),
 			[ $this, 'add_settings_link' ],
 			10,
 			4
@@ -127,101 +134,87 @@ class Settings {
 	}
 
 	/**
+	 * Init locales.
+	 */
+	protected function init_locales() {
+		if ( ! empty( $this->locales ) ) {
+			return;
+		}
+
+		$this->locales = [
+			'iso9'  => [
+				'label' => __( 'ISO9 Table', 'cyr2lat' ),
+			],
+			'bel'   => [
+				'label' => __( 'bel Table', 'cyr2lat' ),
+			],
+			'uk'    => [
+				'label' => __( 'uk Table', 'cyr2lat' ),
+			],
+			'bg_BG' => [
+				'label' => __( 'bg_BG Table', 'cyr2lat' ),
+			],
+			'mk_MK' => [
+				'label' => __( 'mk_MK Table', 'cyr2lat' ),
+			],
+			'sr_RS' => [
+				'label' => __( 'sr_RS Table', 'cyr2lat' ),
+			],
+			'el'    => [
+				'label' => __( 'el Table', 'cyr2lat' ),
+			],
+			'hy'    => [
+				'label' => __( 'hy Table', 'cyr2lat' ),
+			],
+			'ka_GE' => [
+				'label' => __( 'ka_GE Table', 'cyr2lat' ),
+			],
+			'kk'    => [
+				'label' => __( 'kk Table', 'cyr2lat' ),
+			],
+			'he_IL' => [
+				'label' => __( 'he_IL Table', 'cyr2lat' ),
+			],
+			'zh_CN' => [
+				'label' => __( 'zh_CN Table', 'cyr2lat' ),
+			],
+		];
+	}
+
+	/**
+	 * Get current locale.
+	 *
+	 * @return string
+	 */
+	private function get_current_locale() {
+		$current_locale = get_locale();
+
+		return in_array( $current_locale, array_keys( $this->locales ), true ) ? $current_locale : 'iso9';
+	}
+
+	/**
 	 * Init options form fields.
 	 */
 	public function init_form_fields() {
-		$this->form_fields = [
-			'iso9'  => [
-				'label'        => __( 'ISO9 Table', 'cyr2lat' ),
-				'section'      => 'iso9_section',
+		$this->init_locales();
+
+		$current_locale = $this->get_current_locale();
+
+		$this->form_fields = [];
+
+		foreach ( $this->locales as $locale => $info ) {
+			$current = ( $locale === $current_locale ) ? '<br>' . __( '(current)', 'cyr2lat' ) : '';
+
+			$this->form_fields[ $locale ] = [
+				'label'        => $info['label'] . $current,
+				'section'      => $locale . '_section',
 				'type'         => 'table',
 				'placeholder'  => '',
 				'helper'       => '',
 				'supplemental' => '',
-				'default'      => Conversion_Tables::get(),
-			],
-			'bel'   => [
-				'label'        => __( 'bel Table', 'cyr2lat' ),
-				'section'      => 'bel_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'bel' ),
-			],
-			'uk'    => [
-				'label'        => __( 'uk Table', 'cyr2lat' ),
-				'section'      => 'uk_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'uk' ),
-			],
-			'bg_BG' => [
-				'label'        => __( 'bg_BG Table', 'cyr2lat' ),
-				'section'      => 'bg_BG_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'bg_BG' ),
-			],
-			'mk_MK' => [
-				'label'        => __( 'mk_MK Table', 'cyr2lat' ),
-				'section'      => 'mk_MK_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'mk_MK' ),
-			],
-			'sr_RS' => [
-				'label'        => __( 'sr_RS Table', 'cyr2lat' ),
-				'section'      => 'sr_RS_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'sr_RS' ),
-			],
-			'ka_GE' => [
-				'label'        => __( 'ka_GE Table', 'cyr2lat' ),
-				'section'      => 'ka_GE_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'ka_GE' ),
-			],
-			'kk'    => [
-				'label'        => __( 'kk Table', 'cyr2lat' ),
-				'section'      => 'kk_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'kk' ),
-			],
-			'he_IL' => [
-				'label'        => __( 'he_IL Table', 'cyr2lat' ),
-				'section'      => 'he_IL_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'he_IL' ),
-			],
-			'zh_CN' => [
-				'label'        => __( 'zh_CN Table', 'cyr2lat' ),
-				'section'      => 'zh_CN_section',
-				'type'         => 'table',
-				'placeholder'  => '',
-				'helper'       => '',
-				'supplemental' => '',
-				'default'      => Conversion_Tables::get( 'zh_CN' ),
-			],
-		];
+				'default'      => Conversion_Tables::get( $locale ),
+			];
+		}
 	}
 
 	/**
@@ -281,15 +274,15 @@ class Settings {
 		$menu_title  = __( 'Cyr To Lat', 'cyr2lat' );
 		$capability  = 'manage_options';
 		$slug        = self::PAGE;
-		$callback    = [ $this, 'ctl_settings_page' ];
+		$callback    = [ $this, 'settings_page' ];
 		add_submenu_page( $parent_slug, $page_title, $menu_title, $capability, $slug, $callback );
 	}
 
 	/**
 	 * Settings page.
 	 */
-	public function ctl_settings_page() {
-		if ( ! $this->is_ctl_options_screen() ) {
+	public function settings_page() {
+		if ( ! $this->is_options_screen() ) {
 			return;
 		}
 
@@ -352,64 +345,18 @@ class Settings {
 	 * Setup settings sections.
 	 */
 	public function setup_sections() {
-		if ( ! $this->is_ctl_options_screen() ) {
+		if ( ! $this->is_options_screen() ) {
 			return;
 		}
 
-		add_settings_section(
-			'iso9_section',
-			__( 'ISO9 Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
-		add_settings_section(
-			'bel_section',
-			__( 'bel Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
-		add_settings_section(
-			'uk_section',
-			__( 'uk Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
-		add_settings_section(
-			'bg_BG_section',
-			__( 'bg_BG Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
-		add_settings_section(
-			'mk_MK_section',
-			__( 'mk_MK Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
-		add_settings_section(
-			'sr_RS_section',
-			__( 'sr_RS Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
-		add_settings_section(
-			'ka_GE_section',
-			__( 'ka_GE Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
-		add_settings_section(
-			'kk_section',
-			__( 'kk Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
-		add_settings_section(
-			'he_IL_section',
-			__( 'he_IL Table', 'cyr2lat' ),
-			[ $this, 'cyr_to_lat_section' ],
-			self::PAGE
-		);
+		foreach ( $this->form_fields as $form_field ) {
+			add_settings_section(
+				$form_field['section'],
+				$form_field['label'],
+				[ $this, 'section_callback' ],
+				self::PAGE
+			);
+		}
 	}
 
 	/**
@@ -417,14 +364,18 @@ class Settings {
 	 *
 	 * @param array $arguments Section arguments.
 	 */
-	public function cyr_to_lat_section( $arguments ) {
+	public function section_callback( $arguments ) {
+		$locale = str_replace( '_section', '', $arguments['id'] );
+		if ( $this->get_current_locale() === $locale ) {
+			echo '<div id="ctl-current"></div>';
+		}
 	}
 
 	/**
 	 * Setup settings fields.
 	 */
 	public function setup_fields() {
-		if ( ! $this->is_ctl_options_screen() ) {
+		if ( ! $this->is_options_screen() ) {
 			return;
 		}
 
@@ -696,6 +647,11 @@ class Settings {
 			return $value;
 		}
 
+		// We save only one table, so merge with all existing tables.
+		if ( is_array( $old_value ) && ( is_array( $value ) ) ) {
+			$value = array_merge( $old_value, $value );
+		}
+
 		$form_fields = $this->get_form_fields();
 		foreach ( $form_fields as $key => $form_field ) {
 			switch ( $form_field['type'] ) {
@@ -716,23 +672,23 @@ class Settings {
 	 * Enqueue class scripts.
 	 */
 	public function admin_enqueue_scripts() {
-		if ( ! $this->is_ctl_options_screen() ) {
+		if ( ! $this->is_options_screen() ) {
 			return;
 		}
 
 		wp_enqueue_script(
 			'cyr-to-lat-settings',
-			CYR_TO_LAT_URL . '/dist/js/settings/app.js',
+			constant( 'CYR_TO_LAT_URL' ) . '/dist/js/settings/app.js',
 			[],
-			CYR_TO_LAT_VERSION,
+			constant( 'CYR_TO_LAT_VERSION' ),
 			true
 		);
 
 		wp_enqueue_style(
 			'cyr-to-lat-admin',
-			CYR_TO_LAT_URL . '/css/cyr-to-lat-admin.css',
+			constant( 'CYR_TO_LAT_URL' ) . '/css/cyr-to-lat-admin.css',
 			[],
-			CYR_TO_LAT_VERSION
+			constant( 'CYR_TO_LAT_VERSION' )
 		);
 	}
 
@@ -743,7 +699,7 @@ class Settings {
 		load_plugin_textdomain(
 			'cyr2lat',
 			false,
-			dirname( plugin_basename( CYR_TO_LAT_FILE ) ) . '/languages/'
+			dirname( plugin_basename( constant( 'CYR_TO_LAT_FILE' ) ) ) . '/languages/'
 		);
 	}
 
@@ -804,7 +760,7 @@ class Settings {
 	 *
 	 * @return bool
 	 */
-	protected function is_ctl_options_screen() {
+	protected function is_options_screen() {
 		$current_screen = get_current_screen();
 
 		return $current_screen && ( 'options' === $current_screen->id || self::SCREEN_ID === $current_screen->id );

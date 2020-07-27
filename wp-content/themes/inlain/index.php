@@ -1,10 +1,8 @@
 <?php
-global $kino_user, $vnet;
-
-$kino_user->check_login();
-
 get_header();
 
-$vnet->get_template('page-home');
+while (have_posts()) {
+  the_post();
+}
 
 get_footer();

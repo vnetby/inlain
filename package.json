@@ -4,7 +4,6 @@
   "description": "inlain",
   "main": "index.js",
   "scripts": {
-    "assets": "node ./wp-content/themes/inlain/assets/conf.js",
     "webpack-dev": "webpack",
     "webpack-build": "webpack --env=build",
     "update-git": "git add . && git commit -m update && git push origin master"

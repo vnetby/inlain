@@ -17,19 +17,32 @@ use Cyr_To_Lat\Symfony\Polyfill\Mbstring\Mbstring;
 class Main {
 
 	/**
-	 * Regex of prohibited chars in slugs
-	 * [^A-Za-z0-9[.apostrophe.][.underscore.][.period.][.hyphen.]]+
-	 *
-	 * @link https://dev.mysql.com/doc/refman/5.6/en/regexp.html
-	 */
-	const PROHIBITED_CHARS_REGEX = "[^A-Za-z0-9'_\.\-]";
-
-	/**
 	 * Plugin settings.
 	 *
 	 * @var Settings
 	 */
 	protected $settings;
+
+	/**
+	 * Process posts instance.
+	 *
+	 * @var Post_Conversion_Process
+	 */
+	protected $process_all_posts;
+
+	/**
+	 * Process terms instance.
+	 *
+	 * @var Term_Conversion_Process
+	 */
+	protected $process_all_terms;
+
+	/**
+	 * Admin Notices instance.
+	 *
+	 * @var Admin_Notices
+	 */
+	protected $admin_notices;
 
 	/**
 	 * Converter instance.
@@ -54,34 +67,25 @@ class Main {
 
 	/**
 	 * Main constructor.
-	 *
-	 * @param Settings  $settings  Plugin settings.
-	 * @param Converter $converter Converter instance.
-	 * @param WP_CLI    $cli       CLI instance.
-	 * @param ACF       $acf       ACF instance.
 	 */
-	public function __construct( $settings = null, $converter = null, $cli = null, $acf = null ) {
-		$this->settings = $settings;
-		if ( ! $this->settings ) {
-			$this->settings = new Settings();
+	public function __construct() {
+		$this->settings          = new Settings();
+		$this->process_all_posts = new Post_Conversion_Process( $this );
+		$this->process_all_terms = new Term_Conversion_Process( $this );
+		$this->admin_notices     = new Admin_Notices();
+		$this->converter         = new Converter(
+			$this,
+			$this->settings,
+			$this->process_all_posts,
+			$this->process_all_terms,
+			$this->admin_notices
+		);
+
+		if ( defined( 'WP_CLI' ) && constant( 'WP_CLI' ) ) {
+			$this->cli = new WP_CLI( $this->converter );
 		}
 
-		$this->converter = $converter;
-		if ( ! $this->converter ) {
-			$this->converter = new Converter( $this, $this->settings );
-		}
-
-		$this->cli = $cli;
-		if ( defined( 'WP_CLI' ) && WP_CLI ) {
-			if ( ! $this->cli ) {
-				$this->cli = new WP_CLI( $this->converter );
-			}
-		}
-
-		$this->acf = $acf;
-		if ( ! $this->acf ) {
-			$this->acf = new ACF( $this->settings );
-		}
+		$this->acf = new ACF( $this->settings );
 
 		$this->init();
 	}
@@ -90,7 +94,7 @@ class Main {
 	 * Init class.
 	 */
 	public function init() {
-		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+		if ( defined( 'WP_CLI' ) && constant( 'WP_CLI' ) ) {
 			try {
 				/**
 				 * Method WP_CLI::add_command() accepts class as callable.
@@ -110,9 +114,9 @@ class Main {
 	 * Init class hooks.
 	 */
 	public function init_hooks() {
-		add_filter( 'sanitize_title', [ $this, 'ctl_sanitize_title' ], 9, 3 );
-		add_filter( 'sanitize_file_name', [ $this, 'ctl_sanitize_filename' ], 10, 2 );
-		add_filter( 'wp_insert_post_data', [ $this, 'ctl_sanitize_post_name' ], 10, 2 );
+		add_filter( 'sanitize_title', [ $this, 'sanitize_title' ], 9, 3 );
+		add_filter( 'sanitize_file_name', [ $this, 'sanitize_filename' ], 10, 2 );
+		add_filter( 'wp_insert_post_data', [ $this, 'sanitize_post_name' ], 10, 2 );
 	}
 
 	/**
@@ -124,7 +128,7 @@ class Main {
 	 *
 	 * @return string
 	 */
-	public function ctl_sanitize_title( $title, $raw_title = '', $context = '' ) {
+	public function sanitize_title( $title, $raw_title = '', $context = '' ) {
 		global $wpdb;
 
 		if ( ! $title ) {
@@ -161,10 +165,33 @@ class Main {
 		if ( ! empty( $term ) ) {
 			$title = $term;
 		} else {
-			$title = $this->transliterate( $title );
+			$title = $this->is_wc_attribute_taxonomy( $title ) ? $title : $this->transliterate( $title );
 		}
 
 		return $title;
+	}
+
+	/**
+	 * Check if title is an attribute taxonomy.
+	 *
+	 * @param string $title Title.
+	 *
+	 * @return bool
+	 */
+	protected function is_wc_attribute_taxonomy( $title ) {
+		if ( ! function_exists( 'wc_get_attribute_taxonomies' ) ) {
+			return false;
+		}
+
+		$attribute_taxonomies = wc_get_attribute_taxonomies();
+
+		foreach ( $attribute_taxonomies as $attribute_taxonomy ) {
+			if ( $title === $attribute_taxonomy->attribute_name ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -175,7 +202,7 @@ class Main {
 	 *
 	 * @return string
 	 */
-	public function ctl_sanitize_filename( $filename, $filename_raw ) {
+	public function sanitize_filename( $filename, $filename_raw ) {
 		$pre = apply_filters( 'ctl_pre_sanitize_filename', false, $filename );
 
 		if ( false !== $pre ) {
@@ -275,15 +302,12 @@ class Main {
 	 *
 	 * @return bool
 	 */
-	private function ctl_is_classic_editor_plugin_active() {
+	private function is_classic_editor_plugin_active() {
+		// @codeCoverageIgnoreStart
 		if ( ! function_exists( 'is_plugin_active' ) ) {
-			// @codeCoverageIgnoreStart
-			/**
-			 * Do not inspect include path.
-			 */
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
-			// @codeCoverageIgnoreEnd
 		}
+		// @codeCoverageIgnoreEnd
 
 		return is_plugin_active( 'classic-editor/classic-editor.php' );
 	}
@@ -296,7 +320,7 @@ class Main {
 	 *
 	 * @return bool
 	 */
-	private function ctl_is_gutenberg_editor_active() {
+	private function is_gutenberg_editor_active() {
 
 		// Gutenberg plugin is installed and activated.
 		$gutenberg = ! ( false === has_filter( 'replace_editor', 'gutenberg_init' ) );
@@ -308,7 +332,7 @@ class Main {
 			return false;
 		}
 
-		if ( $this->ctl_is_classic_editor_plugin_active() ) {
+		if ( $this->is_classic_editor_plugin_active() ) {
 			$editor_option       = get_option( 'classic-editor-replace' );
 			$block_editor_active = [ 'no-replace', 'block' ];
 
@@ -326,8 +350,15 @@ class Main {
 	 *
 	 * @return mixed
 	 */
-	public function ctl_sanitize_post_name( $data, $postarr = [] ) {
-		if ( ! $this->ctl_is_gutenberg_editor_active() ) {
+	public function sanitize_post_name( $data, $postarr = [] ) {
+		global $current_screen;
+
+		if ( ! $this->is_gutenberg_editor_active() ) {
+			return $data;
+		}
+
+		// Run code only on post edit screen.
+		if ( ! ( $current_screen && 'post' === $current_screen->base ) ) {
 			return $data;
 		}
 
@@ -352,7 +383,7 @@ class Main {
 	 *
 	 * @return string Items separated by comma and sql-escaped
 	 */
-	public function ctl_prepare_in( $items, $format = '%s' ) {
+	public function prepare_in( $items, $format = '%s' ) {
 		global $wpdb;
 
 		$items    = (array) $items;

@@ -64,7 +64,7 @@ class autoptimizeExtra
             }
             add_filter( 'autoptimize_filter_settingsscreen_tabs', array( $this, 'add_extra_tab' ) );
         } else {
-            $this->run_on_frontend();
+            add_action( 'wp', array( $this, 'run_on_frontend' ) );
         }
     }
 
@@ -142,8 +142,16 @@ class autoptimizeExtra
         return $merged;
     }
 
-    protected function run_on_frontend()
+    public function run_on_frontend()
     {
+        // only run the Extra optimizations on frontend if general conditions
+        // for optimizations are met, this to ensure e.g. removing querystrings
+        // is not done when optimizing for logged in users is off, breaking
+        // some pagebuilders (Divi & Elementor).
+        if ( false === autoptimizeMain::should_buffer() ) {
+            return;
+        }
+
         $options = $this->options;
 
         // Disable emojis if specified.
@@ -176,7 +184,7 @@ class autoptimizeExtra
         }
 
         // Preload!
-        if ( ! empty( $options['autoptimize_extra_text_field_7'] ) ) {
+        if ( ! empty( $options['autoptimize_extra_text_field_7'] ) || has_filter( 'autoptimize_filter_extra_tobepreloaded' ) ) {
             add_filter( 'autoptimize_html_after_minify', array( $this, 'filter_preload' ), 10, 2 );
         }
     }
@@ -227,6 +235,10 @@ class autoptimizeExtra
             if ( ! preg_match( '/rel=["\']dns-prefetch["\']/', $matches[0][ $i ] ) ) {
                 // Get fonts name.
                 $font = str_replace( array( '%7C', '%7c' ), '|', $font );
+                if ( strpos( $font, 'fonts.googleapis.com/css2' ) !== false ) {
+                    // (Somewhat) change Google Fonts APIv2 syntax back to v1.
+                    $font = str_replace( array( 'wght@', 'wght%40', ';', '%3B' ), array( '', '', ',', ',' ), $font );
+                }
                 $font = explode( 'family=', $font );
                 $font = ( isset( $font[1] ) ) ? explode( '&', $font[1] ) : array();
                 // Add font to $fonts[$i] but make sure not to pollute with an empty family!
@@ -277,7 +289,7 @@ class autoptimizeExtra
 
             if ( ! empty( $fonts_string ) ) {
                 if ( '5' === $options['autoptimize_extra_radio_field_4'] ) {
-                    $rel_string = 'rel="preload" as="style" onload="' . autoptimizeConfig::get_ao_css_preload_onload() . '"';
+                    $rel_string = 'rel="stylesheet" media="print" onload="' . autoptimizeConfig::get_ao_css_preload_onload() . '"';
                 } else {
                     $rel_string = 'rel="stylesheet"';
                 }
@@ -321,11 +333,6 @@ class autoptimizeExtra
         $out          = substr_replace( $in, $fonts_markup . $inject_point, strpos( $in, $inject_point ), strlen( $inject_point ) );
         unset( $fonts_collection );
 
-        // and insert preload polyfill if "link preload" and if the polyfill isn't there yet (courtesy of inline&defer).
-        $preload_polyfill = autoptimizeConfig::get_ao_css_preload_polyfill();
-        if ( '5' === $options['autoptimize_extra_radio_field_4'] && strpos( $out, $preload_polyfill ) === false ) {
-            $out = str_replace( '</body>', $preload_polyfill . '</body>', $out );
-        }
         return $out;
     }
 
