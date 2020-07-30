@@ -3,6 +3,16 @@ body {
   font-size: 20px;
   line-height: 1.5;
   font-family: "SF Pro Display";
+  @media (max-width: $max_sm) {
+    font-size: 18px;
+  }
+  @media (max-width: $max_xs) {
+    font-size: 15px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 ::selection {
@@ -54,6 +64,38 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   background-color: $c-primary;
+}
+
+.animate-up {
+  div {
+    overflow: hidden;
+  }
+  span {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(100%);
+  }
+  div:nth-child(2) span {
+    transition-delay: 0.25s;
+  }
+  div:nth-child(3) span {
+    transition-delay: 0.3s;
+  }
+  div:nth-child(4) span {
+    transition-delay: 0.35s;
+  }
+  div:nth-child(5) span {
+    transition-delay: 0.4s;
+  }
+  div:nth-child(6) span {
+    transition-delay: 0.45s;
+  }
+
+  &.in-viewport {
+    span {
+      transform: none;
+    }
+  }
 }
 
 .video-wrap {
@@ -113,12 +155,82 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
+.hide-md {
+  @media (max-width: $max_md) {
+    display: none !important;
+  }
+}
+
+.display-md {
+  @media (min-width: $min_md) {
+    display: none !important;
+  }
+}
+
+.hamburger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  .hamburger-els {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0px;
+    overflow: visible;
+    &:after,
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #333;
+      transition: 0.1s;
+    }
+    &:after {
+      top: 3px;
+    }
+    &:before {
+      bottom: 3px;
+    }
+  }
+}
+
+.mobile-menu-is-open .js-open-mobile-menu {
+  .hamburger-els {
+    &:after {
+      top: -1px;
+      transform: rotate(45deg);
+    }
+    &:before {
+      bottom: -1px;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+body.mobile-menu-is-open {
+  overflow: hidden;
+}
+
 /*==============================================================
 *												GRID
 =============================================================== */
 .section {
   padding-top: 120px;
   padding-bottom: 120px;
+  @media (max-width: $max_md) {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+  @media (max-width: $max_sm) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
 }
 
 /*==============================================================
@@ -180,18 +292,45 @@ a.btn:disabled {
 =============================================================== */
 .fs-50 {
   font-size: 50px;
+  @media (max-width: $max_md) {
+    font-size: 40px;
+  }
+  @media (max-width: $max_sm) {
+    font-size: 30px;
+  }
+  @media (max-width: $max_xs) {
+    font-size: 25px;
+  }
 }
 .fs-30 {
   font-size: 30px;
 }
 .fs-40 {
   font-size: 40px;
+  @media (max-width: $max_md) {
+    font-size: 35px;
+  }
+  @media (max-width: $max_sm) {
+    font-size: 30px;
+  }
+  @media (max-width: $max_xs) {
+    font-size: 25px;
+  }
 }
 .fs-25 {
   font-size: 25px;
+  @media (max-width: $max_sm) {
+    font-size: 20px;
+  }
 }
 .fs-20 {
   font-size: 20px;
+  @media (max-width: $max_sm) {
+    font-size: 18px;
+  }
+  @media (max-width: $max_xs) {
+    font-size: 15px;
+  }
 }
 .fs-15 {
   font-size: 15px;
@@ -266,6 +405,7 @@ a.btn:disabled {
     }
     li {
       position: relative;
+      padding-left: 30px;
       &:not(:last-child) {
         margin-bottom: 20px;
       }
@@ -274,8 +414,11 @@ a.btn:disabled {
         color: $c-primary;
         font-weight: bold;
         display: inline-block;
-        margin-right: 20px;
         width: 10px;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
       }
     }
   }

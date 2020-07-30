@@ -9,3 +9,4 @@ require THEME_PATH . 'include/class-theme-load.php';
 
 $theme_load = new Theme_Load;
 $front = new Vnet_Front;
+$about = new About_Company;

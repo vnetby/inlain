@@ -5,7 +5,7 @@ $clients = $this->get_from_array($args, 'clients');
 ?>
 
 
-<section class="section section-clients">
+<section class="section section-clients" id="clients" data-admin>
   <div class="container">
     <?php
     if ($title) {

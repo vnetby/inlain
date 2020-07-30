@@ -9,9 +9,15 @@
 
     <?php
     wp_head();
+
+    $body_class = implode(' ', get_body_class());
     ?>
 </head>
 
-<body>
+<body class="<?= $body_class; ?>">
     <script src="<?= THEME_URI; ?>js/head.min.js"></script>
     <div class="site-wrap">
+        <?php
+        global $vnet;
+        $vnet->get_template('template-header');
+        ?>

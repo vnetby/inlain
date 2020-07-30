@@ -4,7 +4,7 @@ $questions = $this->get_array_from_array($args, 'questions');
 ?>
 
 
-<section class="section section-faq">
+<section class="section section-faq" id="faq" data-admin>
   <div class="container">
     <?php
     if ($title) {

@@ -30,7 +30,6 @@ class Theme_Load extends Vnet_Core
 
   private function define_constants()
   {
-    $this->define('ABOUT_POST', 35);
   }
 
 
@@ -41,6 +40,7 @@ class Theme_Load extends Vnet_Core
   private function load_files()
   {
     require_once $this->path_inc . 'class-vnet-front.php';
+    require_once $this->path_inc . 'class-about-company.php';
   }
 
 
@@ -58,6 +58,7 @@ class Theme_Load extends Vnet_Core
     $vnet->add_lib('multi-select');
     $vnet->add_lib('animate-css');
     $vnet->add_lib('intl-tel-input');
+    $vnet->add_lib('aos');
   }
 
 

@@ -142,4 +142,15 @@ class Vnet_Front extends Vnet_Core
   {
     if ($this->about_info) return $this->about_info;
   }
+
+
+
+
+
+  public function wrap_br_in_span($str)
+  {
+    $str = explode("<br />", $str);
+    $str = array_values(array_filter($str));
+    return '<div><span>' . implode('</span></div><div><span>', $str) . '</span></div>';
+  }
 }

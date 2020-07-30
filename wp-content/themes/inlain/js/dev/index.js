@@ -9,6 +9,11 @@ import { youtubeVideo } from "./youtubeVideo";
 import { staticFormFunctions } from "./forms";
 import { dynamicFormFunctions } from "./forms";
 import { accordion } from "./accordion";
+import { menu } from "./menu";
+import { setScrollDirection } from "./setScrollDirection";
+import { AOS } from "./AOS";
+import { classOnView } from "./classOnView";
+import { setCompensateScrollbar } from "./setCompensateScrollbar";
 
 
 
@@ -30,6 +35,11 @@ export const dynamicFunctions = wrap => {
 
 const staticFunctions = () => {
   staticFormFunctions();
+  menu();
+  setScrollDirection();
+  AOS();
+  classOnView();
+  setCompensateScrollbar();
 }
 
 

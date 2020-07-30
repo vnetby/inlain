@@ -1,6 +1,10 @@
 <?php
 
+global $front;
+
 $title = $this->get_from_array($args, 'title');
+$title = $front->wrap_br_in_span($title);
+
 $subtitle = $this->get_from_array($args, 'subtitle');
 $points = $this->get_array_from_array($args, 'points');
 ?>
@@ -12,7 +16,7 @@ $points = $this->get_array_from_array($args, 'points');
     <?php
     if ($title) {
     ?>
-      <h1 class="page-title fw-bold fs-50 lh-2"><?= $title; ?></h1>
+      <h1 class="page-title fw-bold fs-50 lh-2 animate-up js-clss-on-view"><?= $title; ?></h1>
     <?php
     }
     if ($subtitle) {

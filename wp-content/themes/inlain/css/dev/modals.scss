@@ -1,8 +1,28 @@
-.modal {
-  display: none;
-
+.modal,
+.alert-modal {
   width: 100%;
   max-width: 510px;
   padding: 40px 50px;
   overflow: visible;
+}
+
+.modal {
+  display: none;
+}
+
+.alert-modal {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @extend .fs-30;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin: 0;
+  }
 }

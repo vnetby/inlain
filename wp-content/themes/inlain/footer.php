@@ -1,10 +1,12 @@
 <?php
 global $vnet;
 $vnet->get_template('modals');
-
-wp_footer();
+$vnet->get_template('template-footer');
 ?>
 </div>
+<?php
+wp_footer();
+?>
 </body>
 
 </html>
