@@ -6,6 +6,9 @@ class Vnet_Front extends Vnet_Core
 {
 
 
+  private $about_info = false;
+
+
 
 
 
@@ -73,7 +76,7 @@ class Vnet_Front extends Vnet_Core
     global $vnet;
 
     $name = $this->get_from_array($item, 'block');
-    $id = $this->get_block_id($name);
+    $id = (int)$this->get_block_id($name);
 
     $block = get_field('block', $id);
 
@@ -106,5 +109,37 @@ class Vnet_Front extends Vnet_Core
     global $vnet;
     $file = 'layout-' . $this->get_from_array($item, 'acf_fc_layout');
     $vnet->get_template($file, $item);
+  }
+
+
+
+
+
+
+  public function youtube_to_iframe($link)
+  {
+    return preg_replace(
+      "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i",
+      "//www.youtube.com/embed/$2",
+      $link
+    );
+  }
+
+
+
+
+  public function get_youtube_id($url)
+  {
+    parse_str(parse_url($url, PHP_URL_QUERY), $my_array_of_vars);
+    return $my_array_of_vars['v'];
+  }
+
+
+
+
+
+  public function get_about_info()
+  {
+    if ($this->about_info) return $this->about_info;
   }
 }

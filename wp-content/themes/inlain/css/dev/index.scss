@@ -6,6 +6,8 @@
 
 @import "./common.scss";
 
+@import "./modals.scss";
+
 /*==============================================================
 *											    MAIN SCREEN
 =============================================================== */
@@ -95,6 +97,261 @@
         pointer-events: all;
         opacity: 1;
       }
+    }
+  }
+}
+
+/*==============================================================
+*											SECTION ABOUT
+=============================================================== */
+.section-about {
+  padding-bottom: 0;
+  .section-title {
+    margin-bottom: 60px;
+  }
+  .targets-list {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin: -60px -30px;
+    margin-top: 0;
+    padding-bottom: 60px;
+  }
+  .target-col {
+    padding: 60px 30px;
+    padding-top: 0;
+    width: calc(100% / 3);
+  }
+  .bold-text {
+    margin-bottom: 60px;
+  }
+  .video-container {
+    max-width: 780px;
+    iframe {
+      width: 100%;
+      height: 440px;
+    }
+  }
+  .video-wrap {
+    width: 100%;
+    height: 440px;
+  }
+  .video-caption {
+    padding-top: 10px;
+  }
+  .about-desc {
+    padding-top: 60px;
+  }
+
+  .btn-row {
+    margin: -5px;
+    padding-top: 60px;
+    .btn {
+      margin: 5px;
+    }
+  }
+}
+
+/*==============================================================
+*												SECTION TARGET
+=============================================================== */
+.section-targets {
+  .section-title {
+    margin-bottom: 30px;
+  }
+  .img-wrap {
+    margin-top: 30px;
+  }
+  img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+  .img-caption {
+    padding-top: 30px;
+  }
+}
+
+/*==============================================================
+*												SECTION MOTIVATIONS
+=============================================================== */
+.section-motivations {
+  .section-title {
+    margin-bottom: 60px;
+  }
+  .motivations-list {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin: -60px -30px;
+    margin-top: 0;
+  }
+  .motivation-col {
+    padding: 60px 30px;
+    padding-top: 0;
+    width: 50%;
+    &:nth-child(5) {
+      width: 100%;
+    }
+  }
+}
+
+/*==============================================================
+*												SECTION SOLUTIONS
+=============================================================== */
+.section-solutions {
+  padding-top: 0;
+  .section-title {
+    margin-bottom: 60px;
+  }
+  .solutions-list {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    margin: -60px -30px;
+    margin-top: 0;
+  }
+  .solution-col {
+    width: 50%;
+    padding: 60px 30px;
+    padding-top: 0;
+    &:nth-child(7) {
+      width: 100%;
+      .sol-title,
+      .sol-desc {
+        display: inline;
+        margin: 0;
+        font-weight: bold;
+        @extend .fs-25;
+      }
+      .sol-title {
+        display: inline-block;
+        margin-right: 5px;
+      }
+    }
+  }
+  .btn-row {
+    padding-top: 60px;
+    margin: -5px;
+  }
+  .btn {
+    margin: 5px;
+  }
+  .sol-title {
+    margin-bottom: 10px;
+  }
+}
+
+/*==============================================================
+*												SECTION EDITORWITH BTNS
+=============================================================== */
+.section-editor-with-btns {
+  .section-title {
+    margin-bottom: 30px;
+  }
+  .btn-row {
+    margin: -5px;
+    padding-top: 60px;
+  }
+  .btn {
+    margin: 5px;
+  }
+}
+
+/*==============================================================
+*												SECTION FAQ
+=============================================================== */
+.section-faq {
+  .section-title {
+    margin-bottom: 30px;
+  }
+  .quest-title {
+    margin: 0;
+  }
+}
+
+/*==============================================================
+*												SECTION STEPS
+=============================================================== */
+.section-steps {
+  .section-title {
+    margin-bottom: 50px;
+  }
+  .btn-row {
+    padding-top: 60px;
+  }
+  .steps-list {
+    display: flex;
+    align-items: stretch;
+    margin: 0 -15px;
+  }
+  .step-col {
+    padding: 0 15px;
+    width: 100%;
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 30px;
+      left: 75px;
+      width: calc(100% - 60px);
+      height: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+  }
+  .step-item .desc {
+    padding-top: 20px;
+  }
+  .step-num {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: $c-primary;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+/*==============================================================
+*												SECTION CLIENTS
+=============================================================== */
+.section-clients {
+  .section-title {
+    margin-bottom: 30px;
+  }
+  .subtitle {
+    margin-bottom: 30px;
+  }
+  .clients-list {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+  .client-col {
+    width: 25%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .client-item {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      flex-shrink: 0;
+      flex-grow: 0;
     }
   }
 }

@@ -1,7 +1,5 @@
-/node_modules
-/.dist
-/.idea
-/dist
+node_modules/
+.git/
 /.siteconf.json
 /wp-content/cache
 /wp-content/uploads

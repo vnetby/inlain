@@ -1,0 +1,4 @@
+.post-type-the_blocks .row-actions,
+.post-type-about_company .row-actions {
+  display: none !important;
+}

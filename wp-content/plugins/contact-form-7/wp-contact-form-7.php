@@ -9,7 +9,6 @@ Text Domain: contact-form-7
 Domain Path: /languages/
 Version: 5.2
 */
-
 define( 'WPCF7_VERSION', '5.2' );
 
 define( 'WPCF7_REQUIRED_WP_VERSION', '5.3' );

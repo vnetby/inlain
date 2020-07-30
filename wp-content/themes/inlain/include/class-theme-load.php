@@ -18,6 +18,7 @@ class Theme_Load extends Vnet_Core
     $this->remove_hooks();
     $this->add_hooks();
     $this->add_theme_support();
+    // $this->remove_post_type_support();
 
     $this->add_front_vars();
   }
@@ -56,6 +57,7 @@ class Theme_Load extends Vnet_Core
     $vnet->add_lib('fancybox');
     $vnet->add_lib('multi-select');
     $vnet->add_lib('animate-css');
+    $vnet->add_lib('intl-tel-input');
   }
 
 
@@ -66,13 +68,18 @@ class Theme_Load extends Vnet_Core
   {
     add_action('after_setup_theme', [$this, 'register_menu']);
     add_action('after_setup_theme', [$this, 'register_text_domain']);
+    add_action('after_setup_theme', [$this, 'add_image_size']);
+    add_action('after_setup_theme', [$this, 'register_forms_locations']);
+    add_action('after_setup_theme', [$this, 'register_post_types']);
+    add_action('admin_enqueue_scripts', [$this, 'admin_style']);
 
     add_action('wp_enqueue_scripts', [$this, 'style_theme']);
     add_action('wp_enqueue_scripts', [$this, 'script_theme']);
 
-    add_action('init', [$this, 'register_post_types']);
+    add_action('init', [$this, 'remove_post_type_support']);
 
     add_filter('script_loader_tag', [$this, 'add_async_attribute'], 10, 2);
+    add_filter('image_size_names_choose', [$this, 'set_custom_img_sizes']);
   }
 
 
@@ -97,6 +104,82 @@ class Theme_Load extends Vnet_Core
   {
     add_theme_support('post-thumbnails', ['post', 'page', 'post-blog', 'awards-post', 'clients-post', 'reviews-post', 'vacancies-post', 'work-post', 'tech-post', 'services', 'lang-post']);
     add_theme_support('title-tag');
+  }
+
+
+
+
+
+
+  public function remove_post_type_support()
+  {
+    remove_post_type_support('about_company', 'editor');
+    remove_post_type_support('about_company', 'title');
+    remove_post_type_support('about_company', 'author');
+    remove_post_type_support('about_company', 'trackbacks');
+    remove_post_type_support('about_company', 'excerpt');
+    remove_post_type_support('about_company', 'comments');
+    remove_post_type_support('about_company', 'revisions');
+    remove_post_type_support('about_company', 'page-attributes');
+    remove_post_type_support('about_company', 'post-formats');
+
+    remove_post_type_support('the_blocks', 'editor');
+    // remove_post_type_support('the_blocks', 'title');
+    remove_post_type_support('the_blocks', 'author');
+    remove_post_type_support('the_blocks', 'trackbacks');
+    remove_post_type_support('the_blocks', 'excerpt');
+    remove_post_type_support('the_blocks', 'comments');
+    remove_post_type_support('the_blocks', 'revisions');
+    remove_post_type_support('the_blocks', 'page-attributes');
+    remove_post_type_support('the_blocks', 'post-formats');
+  }
+
+
+
+
+
+
+
+  public function register_forms_locations()
+  {
+    global $cfextend;
+
+    if ($cfextend) {
+      $cfextend->register_form_location('order_test', ['label' => 'Заказать тестирование']);
+      $cfextend->register_form_location('order_consulting', ['label' => 'Заказать консультацию']);
+    }
+  }
+
+
+
+
+
+
+  public function add_image_size()
+  {
+    add_image_size('inlain-video-cover', '780', '440', true);
+  }
+
+
+
+
+
+
+  public function admin_style()
+  {
+    wp_enqueue_style('admin-styles', THEME_URI . 'css/admin.css');
+  }
+
+
+
+
+
+
+  public function set_custom_img_sizes($sizes)
+  {
+    return array_merge($sizes, [
+      'inlain-video-cover' => 'Видео превью'
+    ]);
   }
 
 
@@ -250,15 +333,6 @@ class Theme_Load extends Vnet_Core
   {
     global $vnet;
 
-    $vnet->set_js_var('validateMsg', [
-      'invalidExtension' => 'недопустимый формат файла',
-      'required' => 'Заполните поле',
-      'checkboxRequired' => 'Выберите значение',
-      'invalidEmail' => 'Неверный формат e-mail',
-      'invlidCompare' => 'Значения не совпадают',
-      'imgFormat' => 'Выберите изображение',
-      'maxFileSize' => 'Макимальный размер фала: $1мб', // $1 - max file size
-      'minLength' => 'Минимальное количество символов: $1' // $1 - min number
-    ]);
+    $vnet->set_js_var('SRC', THEME_URI);
   }
 }

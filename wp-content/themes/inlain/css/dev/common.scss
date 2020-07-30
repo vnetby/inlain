@@ -18,6 +18,10 @@ a:active {
   transition: 0.15s;
 }
 
+iframe {
+  border: none;
+}
+
 h1,
 h2,
 h3,
@@ -30,6 +34,83 @@ h6 {
 p {
   margin: 0;
   margin-top: 15px;
+}
+
+a,
+button {
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: $c-primary;
+}
+
+.video-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.site-wrap {
+  overflow: hidden;
+}
+
+.video-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  cursor: pointer;
+  transition: 0.5s;
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    transition: 0.2s;
+  }
+  &:hover {
+    svg {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+  &:active {
+    svg {
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .loading & {
+    cursor: auto;
+    pointer-events: none;
+    svg {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+
+  .loaded & {
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    // transform: scale(0);
+  }
 }
 
 /*==============================================================
@@ -49,15 +130,17 @@ p {
 }
 
 .btn,
-a.btn {
+a.btn,
+button.btn {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   flex-shrink: 0;
   padding: 15px 20px;
-
-  transition: 0.15s;
+  border: none;
+  transition: 0.2s;
+  cursor: pointer;
 
   font-size: 20px;
   font-weight: bold;
@@ -66,7 +149,7 @@ a.btn {
     background-color: $c-primary;
     color: #fff;
     &:hover {
-      background-color: lighten($c-primary, 70%);
+      background-color: lighten($c-primary, 15%);
     }
   }
 
@@ -97,6 +180,9 @@ a.btn:disabled {
 =============================================================== */
 .fs-50 {
   font-size: 50px;
+}
+.fs-30 {
+  font-size: 30px;
 }
 .fs-40 {
   font-size: 40px;
@@ -155,4 +241,195 @@ a.btn:disabled {
 }
 .bg-dark {
   background-color: #111111;
+}
+
+/*==============================================================
+*												EDITOR CONTET
+=============================================================== */
+.editor-content {
+  p:first-child {
+    margin-top: 0;
+  }
+  p,
+  ul,
+  ol {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    padding-top: 10px;
+    margin-bottom: 30px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    li {
+      position: relative;
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+      &:before {
+        content: "\2022";
+        color: $c-primary;
+        font-weight: bold;
+        display: inline-block;
+        margin-right: 20px;
+        width: 10px;
+      }
+    }
+  }
+}
+
+/*==============================================================
+*												FORMS
+=============================================================== */
+.input {
+  width: 100%;
+  border: none;
+  &,
+  &:focus {
+    outline: none;
+  }
+  padding: 10px 0;
+  &::placeholder {
+    color: rgba(62, 67, 63, 0.5);
+  }
+  border-bottom: 1px solid rgba(62, 67, 63, 0.1);
+
+  display: block;
+}
+
+.wpcf7-form-control-wrap {
+  position: relative;
+  display: block;
+
+  &:after {
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform-origin: center left;
+    transition: 0.2s;
+    background-color: $c-primary;
+    transform: rotateY(90deg);
+  }
+  &.has-focus {
+    &:after {
+      transform: none;
+    }
+  }
+}
+
+.input-wrap:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.wpcf7-not-valid-tip {
+  display: block;
+  font-size: 12px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 5px;
+}
+
+.wpcf7-response-output {
+  display: none !important;
+}
+
+.submit-btn-row {
+  padding-top: 60px;
+}
+
+.submit-wrap,
+.form-help {
+  width: 50%;
+}
+
+.submit-wrap {
+  padding-right: 15px;
+}
+
+button[type="submit"] {
+  width: 100%;
+}
+
+.form-help {
+  @extend .c-grey;
+  @extend .fs-15;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
+
+/*==============================================================
+*												ACCORDION
+=============================================================== */
+
+.accordion-item:not(.active) .accordion-body {
+  display: none;
+}
+
+.accordion-head {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.accordion-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.accordion-ico {
+  display: block;
+  margin-left: auto;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  margin-left: 20px;
+  margin-left: auto;
+  &:after,
+  &:before {
+    content: "";
+    position: absolute;
+    display: block;
+    background-color: #000;
+  }
+  &:after {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+  &:before {
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 2px;
+    transform: translateX(-50%);
+    transition: 0.2s;
+  }
+}
+
+.accordion-item.active .accordion-ico:before {
+  transform: translateX(-50%) rotateX(90deg);
+}
+
+.accordion-body {
+  padding-bottom: 30px;
+}
+
+.accordion-item.active .accordion-head {
+  cursor: auto;
 }

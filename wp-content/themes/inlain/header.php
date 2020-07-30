@@ -14,3 +14,4 @@
 
 <body>
     <script src="<?= THEME_URI; ?>js/head.min.js"></script>
+    <div class="site-wrap">
