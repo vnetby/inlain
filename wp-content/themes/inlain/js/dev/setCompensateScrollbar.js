@@ -7,10 +7,10 @@ export const setCompensateScrollbar = () => {
 
   style.innerHTML = `
     body.compensate-for-scrollbar .header .btn-col {
-      padding-right: ${dom.scrollBarWidth}px
+      padding-right: ${dom.scrollBarWidth}px;
     }
     body.compensate-for-scrollbar #wpadminbar {
-      padding-right: ${dom.scrollBarWidth}px
+      padding-right: ${dom.scrollBarWidth}px;
     }
   `;
 

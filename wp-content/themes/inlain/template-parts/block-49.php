@@ -88,12 +88,9 @@ $desc = $this->get_from_array($args, 'desc');
     }
     ?>
     <div class="btn-row">
-      <a href="#modalOrderTest" data-fancybox data-touch="false" class="btn btn-primary">
-        <span class="text"><?= __('Заказать тестирование', 'inlain'); ?></span>
-      </a>
-      <a href="#modalOrderConsult" data-fancybox data-touch="false" class="btn btn-border">
-        <span class="text"><?= __('Заказать консультацию', 'inlain'); ?></span>
-      </a>
+      <?php
+      echo $front->the_modal_btn(['order_test', 'order_consult']);
+      ?>
     </div>
   </div>
 </section>

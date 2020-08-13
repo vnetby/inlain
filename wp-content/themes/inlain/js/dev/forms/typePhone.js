@@ -4,7 +4,6 @@ import { dom } from "vnet-dom";
 
 
 export const typePhone = container => {
-  return;
   let inputs = dom.findAll('.custom-phone', container);
   if (!inputs) return;
 

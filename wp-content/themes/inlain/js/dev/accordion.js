@@ -25,11 +25,17 @@ const initAccordion = accordion => {
 
   items.forEach(item => {
     dom.onClick('.accordion-head', e => {
-      if (item.classList.contains('active')) return;
       let body = dom.findFirst('.accordion-body', item);
-      hideBodies(bodies, body);
+
+      if (item.classList.contains('active')) {
+        $(body).slideUp({ duration: 200 });
+        dom.removeClass(item, 'active');
+        return;
+      }
+
+      // hideBodies(bodies, body);
       showBody(body);
-      dom.removeClass(items, 'active');
+      // dom.removeClass(items, 'active');
       dom.addClass(item, 'active');
     }, item);
   });

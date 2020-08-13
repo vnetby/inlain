@@ -20,7 +20,7 @@ $questions = $this->get_array_from_array($args, 'questions');
           $question = $this->get_from_array($quest, 'question');
           $answ = $this->get_from_array($quest, 'answer');
         ?>
-          <div class="accordion-item<?= $i === 0 ? ' active' : ''; ?>">
+          <div class="accordion-item">
             <div class="accordion-head">
               <?php
               if ($question) {

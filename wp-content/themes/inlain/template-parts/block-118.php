@@ -1,4 +1,6 @@
 <?php
+global $front;
+
 $title = $this->get_from_array($args, 'title');
 $solutions = $this->get_array_from_array($args, 'solutions');
 ?>
@@ -42,12 +44,9 @@ $solutions = $this->get_array_from_array($args, 'solutions');
     }
     ?>
     <div class="btn-row">
-      <a href="#modalOrderTest" data-fancybox data-touch="false" class="btn btn-primary">
-        <span class="text">Заказать тестирование</span>
-      </a>
-      <a href="#modalOrderConsult" data-fancybox data-touch="false" class="btn btn-border">
-        <span class="text">Заказать консультацию</span>
-      </a>
+      <?php
+      echo $front->the_modal_btn(['order_test', 'order_consult']);
+      ?>
     </div>
   </div>
 </section>

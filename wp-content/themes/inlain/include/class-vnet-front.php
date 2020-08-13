@@ -153,4 +153,34 @@ class Vnet_Front extends Vnet_Core
     $str = array_values(array_filter($str));
     return '<div><span>' . implode('</span></div><div><span>', $str) . '</span></div>';
   }
+
+
+
+
+
+
+
+  public function the_modal_btn($btns = [])
+  {
+    ob_start();
+    foreach ($btns as $key) {
+      if ($key === 'order_test') {
+?>
+        <a href="#modalOrderTest" data-fancybox data-touch="false" class="btn btn-hov-primary">
+          <span class="text"><?= __('Заказать тестирование', 'inlain'); ?></span>
+        </a>
+      <?php
+        continue;
+      }
+
+      if ($key === 'order_consult') {
+      ?>
+        <a href="#modalOrderConsult" data-fancybox data-touch="false" class="btn btn-border">
+          <span class="text"><?= __('Заказать консультацию', 'inlain'); ?></span>
+        </a>
+<?php
+      }
+    }
+    return ob_get_clean();
+  }
 }

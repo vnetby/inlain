@@ -73,6 +73,8 @@ class Theme_Load extends Vnet_Core
     add_action('after_setup_theme', [$this, 'register_forms_locations']);
     add_action('after_setup_theme', [$this, 'register_post_types']);
     add_action('admin_enqueue_scripts', [$this, 'admin_style']);
+    add_action('wp_ajax_get_privacy_police_modal', [$this, 'ajax_get_privacy_police_modal']);
+    add_action('wp_ajax_nopriv_get_privacy_police_modal', [$this, 'ajax_get_privacy_police_modal']);
 
     add_action('wp_enqueue_scripts', [$this, 'style_theme']);
     add_action('wp_enqueue_scripts', [$this, 'script_theme']);
@@ -81,10 +83,43 @@ class Theme_Load extends Vnet_Core
 
     add_filter('script_loader_tag', [$this, 'add_async_attribute'], 10, 2);
     add_filter('image_size_names_choose', [$this, 'set_custom_img_sizes']);
+
+    wpcf7_add_form_tag('privacy_police', [$this, 'wpcf7_privacy_police']);
   }
 
 
 
+
+
+
+
+
+
+  public function wpcf7_privacy_police()
+  {
+    ob_start();
+?>
+    <div class="c-grey">
+      <?= __('Я принимаю условия <br><a href="#" class="js-load-privacy-police hov-opacity c-primary td-underline">передачи информации</a>', 'inline'); ?>
+    </div>
+<?php
+    return ob_get_clean();
+  }
+
+
+
+
+
+
+
+  public function ajax_get_privacy_police_modal()
+  {
+    global $vnet;
+    $post_id = get_option('wp_page_for_privacy_policy');
+    $police_page = get_post($post_id);
+
+    $vnet->get_template('modal-privacy-police', ['post' => $police_page]);
+  }
 
 
 

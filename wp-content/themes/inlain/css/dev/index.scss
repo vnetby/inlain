@@ -205,7 +205,8 @@
     max-width: 780px;
     iframe {
       width: 100%;
-      height: 440px;
+      height: 100%;
+      // height: 440px;
     }
   }
   .video-wrap {
@@ -696,7 +697,7 @@
   transition: 0.2s;
 
   .scroll-down & {
-    transform: translateY(-100%);
+    // transform: translateY(-100%);
   }
   .scroll-down.mobile-menu-is-open & {
     transform: none;
@@ -776,7 +777,7 @@
     .container {
       flex-direction: column;
       align-items: center;
-      justify-content: center;      
+      justify-content: center;
     }
     .sign-col {
       padding-top: 30px;

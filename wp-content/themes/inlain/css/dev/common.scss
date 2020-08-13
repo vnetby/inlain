@@ -20,6 +20,13 @@ html {
   color: #fff;
 }
 
+body.loading {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: auto;
+  user-select: none;
+}
+
 a,
 a:visited,
 a:active {
@@ -46,6 +53,18 @@ p {
   margin-top: 15px;
 }
 
+.hov-primary {
+  &:hover {
+    color: $c-primary;
+  }
+}
+
+.hov-opacity {
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
 a,
 button {
   &:focus,
@@ -54,17 +73,17 @@ button {
   }
 }
 
-body::-webkit-scrollbar {
-  width: 12px;
-}
+// body::-webkit-scrollbar {
+//   width: 12px;
+// }
 
-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-}
+// body::-webkit-scrollbar-track {
+//   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+// }
 
-body::-webkit-scrollbar-thumb {
-  background-color: $c-primary;
-}
+// body::-webkit-scrollbar-thumb {
+//   background-color: $c-primary;
+// }
 
 .animate-up {
   div {
@@ -261,7 +280,18 @@ button.btn {
     background-color: $c-primary;
     color: #fff;
     &:hover {
-      background-color: lighten($c-primary, 15%);
+      // background-color: lighten($c-primary, 15%);
+      background-color: #fff;
+      color: $c-primary;
+    }
+  }
+
+  &.btn-hov-primary {
+    background-color: $c-primary;
+    color: #fff;
+    &:hover {
+      background-color: #ba0028;
+      color: #fff;
     }
   }
 
@@ -278,6 +308,11 @@ button.btn {
   &.btn-border-fff {
     border: 2px solid #fff;
     color: #fff;
+
+    &:hover {
+      background-color: #fff;
+      color: $c-primary;
+    }
   }
 }
 
@@ -349,14 +384,20 @@ a.btn:disabled {
 .ta-center {
   text-align: center;
 }
+.td-underline,
+a.td-underline {
+  text-decoration: underline;
+}
 
 /*==============================================================
 *												COLORS
 =============================================================== */
-.c-primary {
+.c-primary,
+a.c-primary {
   color: $c-primary;
 }
-.c-grey {
+.c-grey,
+a.c-grey {
   color: #8b8b8b;
 }
 .c-light {
@@ -574,5 +615,5 @@ button[type="submit"] {
 }
 
 .accordion-item.active .accordion-head {
-  cursor: auto;
+  // cursor: auto;
 }

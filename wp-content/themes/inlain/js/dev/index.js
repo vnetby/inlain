@@ -14,6 +14,8 @@ import { setScrollDirection } from "./setScrollDirection";
 import { AOS } from "./AOS";
 import { classOnView } from "./classOnView";
 import { setCompensateScrollbar } from "./setCompensateScrollbar";
+import { loadPrivacyPolice } from "./loadPrivacyPolice";
+import { googleTargets } from "./googleTargets";
 
 
 
@@ -26,6 +28,7 @@ export const dynamicFunctions = wrap => {
   youtubeVideo(container);
   dynamicFormFunctions(container);
   accordion(container);
+  loadPrivacyPolice(container);
 }
 
 
@@ -40,6 +43,7 @@ const staticFunctions = () => {
   AOS();
   classOnView();
   setCompensateScrollbar();
+  googleTargets({ yaCounter: '66220897' });
 }
 
 

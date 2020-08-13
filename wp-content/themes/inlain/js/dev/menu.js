@@ -14,6 +14,8 @@ export const menu = () => {
 
     if (!block) return;
 
+    dom.window.location.hash = id.replace(/#/, '');
+
     let top = block.getBoundingClientRect().top + dom.window.pageYOffset;
 
     dom.window.scrollTo(0, top);
