@@ -3,7 +3,7 @@ $title = $this->get_from_array($args, 'title');
 $motivations = $this->get_array_from_array($args, 'motivations');
 ?>
 
-<section class="section section-motivations bg-dark c-white" data-admin>
+<section class="section section-motivations bg-dark c-white" id="motivations" data-admin>
   <div class="container">
     <?php
     if ($title) {

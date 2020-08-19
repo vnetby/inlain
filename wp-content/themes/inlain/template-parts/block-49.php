@@ -15,7 +15,7 @@ $desc = $this->get_from_array($args, 'desc');
 
 
 
-<section class="section section-about" data-admin>
+<section class="section section-about" id="about" data-admin>
   <div class="container">
     <?php
     if ($title) {

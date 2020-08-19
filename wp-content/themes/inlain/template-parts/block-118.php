@@ -4,7 +4,7 @@ global $front;
 $title = $this->get_from_array($args, 'title');
 $solutions = $this->get_array_from_array($args, 'solutions');
 ?>
-<section class="section section-solutions" data-admin>
+<section class="section section-solutions" id="solutions" data-admin>
   <div class="container">
     <?php
     if ($title) {

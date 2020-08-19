@@ -4,10 +4,12 @@ $desc = $this->get_from_array($args, 'desc');
 $img = $this->get_from_array($args, 'img');
 if ($img) $img = wp_get_attachment_image_url($img, 'large');
 $capiton = $this->get_from_array($args, 'caption');
+
+$id = $this->get_from_array($args, 'id');
 ?>
 
 
-<section class="section section-targets" data-admin>
+<section class="section section-targets" <?= $id ? 'id="' . $id . '"' : ''; ?> data-admin>
   <div class="container">
     <?php
     if ($title) {

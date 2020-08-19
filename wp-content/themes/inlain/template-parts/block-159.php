@@ -4,7 +4,7 @@ $steps = $this->get_array_from_array($args, 'steps');
 ?>
 
 
-<section class="section section-steps bg-primary c-white" data-admin>
+<section class="section section-steps bg-primary c-white" id="steps" data-admin>
   <div class="container">
     <?php
     if ($title) {
