@@ -1,4 +1,8 @@
 <?php
+if ($SITE_SETTINGS['WP_DEBUG']) {
+  error_reporting(E_ERROR | E_WARNING | E_PARSE);
+}
+
 require realpath(dirname(__FILE__) . '/../') . '/vnet_theme/include/class-vnet-load.php';
 new Vnet_Load;
 

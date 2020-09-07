@@ -83,7 +83,7 @@ $table_prefix = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', $SITE_SETTINGS['WP_DEBUG']);
+// define('WP_DEBUG', $SITE_SETTINGS['WP_DEBUG']);
 
 /* Это всё, дальше не редактируем. Успехов! */
 

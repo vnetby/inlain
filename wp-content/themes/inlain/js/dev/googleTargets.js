@@ -34,7 +34,7 @@ const initForms = () => {
       event = 'formsubmit';
     }
     if (form.classList.contains('form-order-consult')) {
-      event = 'contactconsult';
+      event = 'consultform';
     }
     ym(yaCounter, 'reachGoal', 'formsubmit');
     dataLayer.push({ event: 'formsubmit' });
