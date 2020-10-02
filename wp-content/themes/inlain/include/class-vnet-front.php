@@ -167,7 +167,7 @@ class Vnet_Front extends Vnet_Core
       if ($key === 'order_test') {
 ?>
         <a href="#modalOrderTest" data-fancybox data-touch="false" class="btn btn-hov-primary">
-          <span class="text"><?= __('Заказать тестирование', 'inlain'); ?></span>
+          <span class="text"><?= __('Заказать звонок', 'inlain'); ?></span>
         </a>
       <?php
         continue;

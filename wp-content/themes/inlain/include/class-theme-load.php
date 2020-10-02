@@ -181,7 +181,7 @@ class Theme_Load extends Vnet_Core
     global $cfextend;
 
     if ($cfextend) {
-      $cfextend->register_form_location('order_test', ['label' => 'Заказать тестирование']);
+      $cfextend->register_form_location('order_test', ['label' => 'Заказать звонок']);
       $cfextend->register_form_location('order_consulting', ['label' => 'Заказать консультацию']);
     }
   }

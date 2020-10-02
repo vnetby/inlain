@@ -10,4 +10,9 @@ global $about;
       <?= $about->get_signature(); ?>
     </div>
   </div>
+  <div class="dev-foot">
+    <div class="container">
+      <a class="pub-link" target="_blank" href="https://itprofit.dev/">Сайт разработан ITprofit</a>
+    </div>
+  </div>
 </footer>

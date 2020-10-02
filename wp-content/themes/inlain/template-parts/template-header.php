@@ -31,7 +31,7 @@ global $about;
     </div>
     <div class="btn-col hide-md">
       <a href="#modalOrderTest" data-fancybox data-touch="false" class="btn btn-hov-primary">
-        <span class="text"><?= __('Заказать тестирование', 'inlain'); ?></span>
+        <span class="text"><?= __('Заказать звонок', 'inlain'); ?></span>
       </a>
     </div>
     <div class="mobile-btn-col display-md">
@@ -68,7 +68,7 @@ global $about;
     ?>
     <div class="btn-row">
       <a href="#modalOrderTest" data-fancybox data-touch="false" class="btn btn-hov-primary">
-        <span class="text"><?= __('Заказать тестирование', 'inlain'); ?></span>
+        <span class="text"><?= __('Заказать звонок', 'inlain'); ?></span>
       </a>
     </div>
   </div>

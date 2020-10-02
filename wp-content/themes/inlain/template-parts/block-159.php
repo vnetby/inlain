@@ -36,7 +36,7 @@ $steps = $this->get_array_from_array($args, 'steps');
     ?>
     <div class="btn-row">
       <a href="#modalOrderTest" class="btn btn-border-fff" data-fancybox data-touch="false">
-        <span class="text"><?= __('Заказать тестирование', 'inlain'); ?></span>
+        <span class="text"><?= __('Заказать звонок', 'inlain'); ?></span>
       </a>
     </div>
   </div>
